@@ -1,8 +1,11 @@
+#pragma once
 #ifndef SERVER_H
 #define SERVER_H
 
 #include "user.h"
 #include <vector>
+class City;
+class User;
 
 class Server{
   public:

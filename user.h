@@ -1,3 +1,4 @@
+#pragma once
 #ifndef USER_H
 #define USER_H
 
@@ -5,6 +6,8 @@
 #include "city.h"
 #include <vector>
 
+class City;
+class Server;
 class User{
   public:
     User();
