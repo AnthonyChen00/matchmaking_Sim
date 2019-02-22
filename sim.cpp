@@ -18,6 +18,7 @@ void Sim::initialize_Simulator_A(){
   listOfCities.push_back(c);
 
   //Initialize listOfUsers
+
 }
 int main(){
 

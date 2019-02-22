@@ -4,6 +4,7 @@
 
 #include "server.h"
 #include "city.h"
+#include <stdlib.h>
 #include <vector>
 
 class City;
@@ -14,6 +15,8 @@ class User{
     User();
     ~User();
     void setCity(City* newCity){currentCity = newCity;}
+    void setServer(Server* newServer){server = newServer;}
+    int getBandwidth(){return bandwidth;}
     City* getCity(){return currentCity;}
     void removeUser(User targetUser);
     void addUser(User targetUser);

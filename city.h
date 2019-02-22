@@ -15,8 +15,8 @@ class City{
     void removeUser(User targetUser);
     void addUser(User targetUser);
     void updateMatrix(int value, int row, int col);
-    int getCity();
-    void setCity(int newCityNo);
+    int getCity(){return cityNo;}
+    void setCity(int newCityNo){cityNo = newCityNo;}
   private:
     std::vector<User> Users;
     std::vector< std::vector<int> > adjMatrix;
