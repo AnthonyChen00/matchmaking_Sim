@@ -20,6 +20,7 @@ class City{
   private:
     std::vector<User> Users;
     std::vector< std::vector<int> > adjMatrix;
+    //needs to store the distance to other cities, maybe have an array? each index represents a city and the value is the distance? 
     int cityNo;
 };
 
