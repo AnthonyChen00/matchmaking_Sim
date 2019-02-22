@@ -8,21 +8,22 @@
 
 class City;
 class Server;
+
 class User{
   public:
     User();
     ~User();
-    void setCity(City newCity){currentCity = newCity;}
-    City getCity(){return currentCity;}
+    void setCity(City* newCity){currentCity = newCity;}
+    City* getCity(){return currentCity;}
     void removeUser(User targetUser);
     void addUser(User targetUser);
     int ping(User target);
     void send();
   private:
     int bandwidth;
-    City currentCity;
+    City* currentCity;
     std::vector<int> distanceTo;
-    Server server;
+    Server* server;
 };
 
 #endif
