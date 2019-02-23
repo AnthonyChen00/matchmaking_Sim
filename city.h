@@ -14,13 +14,19 @@ class City{
     ~City();
     void removeUser(User targetUser);
     void addUser(User targetUser);
-    void updateMatrix(int value, int row, int col);
-    int getCity(){return cityNo;}
-    void setCity(int newCityNo){cityNo = newCityNo;}
+
+    int getCityNo(){return cityNo;}
+    void setCityNO(int newCityNo){cityNo = newCityNo;} // update/assign the current City ID
+
+    int setAdjMatrix();
+    int getDistance(City targetCity); // return the distance between this city and targetCity
+    void updateDistance(int distance, City targetCity); // update the distance between this city and targetCity
+    void addCity(int distance[]); // [b] dont think this is currently neccessary
+
+
   private:
     std::vector<User> Users;
-    std::vector< std::vector<int> > adjMatrix;
-    //needs to store the distance to other cities, maybe have an array? each index represents a city and the value is the distance? 
+    std::vector< std::vector<int> > adjMatrix; // [a]: should be shared among all the cities, should the simulator update/maintain the matrix completely?
     int cityNo;
 };
 
