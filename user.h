@@ -23,9 +23,10 @@ class User{
     int ping(User target);
     void send();
   private:
+    int userID;
     int bandwidth;
     City* currentCity;
-    std::vector<int> distanceTo;
+    std::vector<int> distanceTo; //need a method of knowing which user is to where
     Server* server;
 };
 
