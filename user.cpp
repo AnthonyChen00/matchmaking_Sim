@@ -16,7 +16,11 @@ User::~User(){
 }
 
 void User::removeUser(User targetUser){
-
+  for(int i=0; i<userList.size(); ++i){
+    if(targetUser.getID() == userList[i].getID()){
+      userList.erase(i);
+    }
+  }
 }
 
 void User::addUser(User targetUser){
@@ -24,7 +28,8 @@ void User::addUser(User targetUser){
 }
 
 int User::ping(User target){ // [c] frickin forward declarations, I am getting confused by the pointers and stuff
-  return 0;
+  int distance = currentCity->getDistance(*(target.getCity()));
+  return distance/bandwidth;
   // attempt 2
   // City temp = target.getCity();
   // int distance = temp.getDistance(this->getCity());
@@ -33,5 +38,5 @@ int User::ping(User target){ // [c] frickin forward declarations, I am getting c
 }
 
 void User::send(){
-
+  server->updateUserDistances(userID, distanceTo);
 }
