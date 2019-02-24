@@ -26,6 +26,7 @@ class User{
     void setBandWidth(int new_bandwidth){bandwidth = new_bandwidth;}
     Server* getServer(){return server;}
     City* getCity(){return currentCity;}
+    void removeUser(User targetUser);
     void addWantedHosts(User wantedHost);
     // Member Functions
     int ping(User target);

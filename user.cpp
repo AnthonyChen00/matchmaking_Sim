@@ -35,6 +35,10 @@ int User::ping(User target){
   return distance/bandwidth;
 }
 
+void User::removeUser(User targetUser){
+
+}
+
 void User::addWantedHosts(User wantedHost){
   wantedHosts.push_back(wantedHost);
   send();

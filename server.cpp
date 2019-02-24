@@ -18,7 +18,7 @@ void Server::group(){
 }
 
 void Server::init_city_adjMatrix(){
-  for(int i=0; i<cityList.size();i++){
+  for(unsigned int i=0; i<cityList.size();i++){
     cityList[i].setAdjMatrix(adjMatrix);
   }
 }
@@ -29,16 +29,14 @@ void Server::removeUser(User targetUser){
     if (targetUser.getID() == userList[i].getID()){
 
       //remove the user from the list
-      userList.erase(i);
+      userList.erase(userList.begin() + i);
     }
     else{
       userList[i].removeUser(targetUser);
     }
   }
-  City targetUserCity = targetUser.getCity();
-  targetUserCity.removeUser(targetUser);
-  }
 }
+
 
 void Server::addUser(User targetUser){
   commandUserPing(targetUser);
@@ -52,6 +50,10 @@ void Server::updateMatrix(int distance, City cityOne, City cityTwo){
   int cityTwoId = cityTwo.getCityNo();
   adjMatrix[cityOneId][cityTwoId] = distance;
   adjMatrix[cityTwoId][cityOneId] = distance;
+}
+
+void Server::updateUserWanted(int userID, std::vector<User> usersWanted){
+
 }
 
 void Server::commandUserPing(User pingingUser){
