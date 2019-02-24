@@ -12,8 +12,6 @@ class City{
   public:
     City();
     ~City();
-    void removeUser(User targetUser);
-    void addUser(User targetUser);
 
     int getCityNo(){return cityNo;}
     void setCityNO(int newCityNo){cityNo = newCityNo;} // update/assign the current City ID
@@ -22,7 +20,8 @@ class City{
     int getDistance(City targetCity); // return the distance between this city and targetCity
     void updateDistance(int distance, City targetCity); // update the distance between this city and targetCity
     void addCity(int distance[]); // [b] dont think this is currently neccessary
-
+    void removeUser(User targetUser);
+    void addUser(User targetUser);
 
   private:
     std::vector<User> Users;

@@ -6,17 +6,19 @@
 #include "city.h"
 #include <stdlib.h>
 #include <vector>
+#include <utility>
+#include <iostream>
 
 class City;
 class Server;
 
 class User{
   public:
-    User();
+    User(int userID, int bandwidth, Server server, City city);
     ~User();
 
     //Setters and Getters
-    void getID(){return userID;}
+    int getID(){return userID;}
     void setID(int new_ID){userID = new_ID;}
     void setCity(City* newCity){currentCity = newCity;}
     void setServer(Server* newServer){server = newServer;}
@@ -26,18 +28,16 @@ class User{
     City* getCity(){return currentCity;}
 
     // Member Functions
-    void removeUser(User targetUser); //[e] might need to change the data structure/format of the user list of other users
-    void addUser(User targetUser);    //[e] dont know how to deal with indexing users from the list  and how to handle user's being deleted
     int ping(User target);
+    void pingAll(std::vector<User> users);
     void send();
 
   private:
     int userID;
     int bandwidth;
     City* currentCity;
-    std::vector<int> distanceTo; //need a method of knowing which user is to where - how will we distingush who this one guy is connected to?
+    std::vector< std::pair<int,int> > distanceTo; //need a method of knowing which user is to where - how will we distingush who this one guy is connected to?
     Server* server;
-    std::vector<User> userList;
 };
 
 #endif

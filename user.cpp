@@ -1,10 +1,11 @@
 #include "user.h"
 
 
-User::User(){
-  bandwidth = rand() % 5;
-  currentCity = NULL;
-  server = NULL;
+User::User(int userID, int bandwidth, Server server, City city){
+  currentCity = &city;
+  this->server = &server;
+  this->userID = userID;
+  this->bandwidth = bandwidth;
 }
 
 User::~User(){
@@ -15,19 +16,19 @@ User::~User(){
   }
 }
 
-void User::removeUser(User targetUser){
-  for(int i=0; i<userList.size(); ++i){
-    if(targetUser.getID() == userList[i].getID()){
-      userList.erase(i);
-    }
+void User::pingAll(std::vector<User> users){
+  for(int i=0; i<users.size(); i++){
+    std::pair<int,int> tempPair;
+    tempPair.first = users[i].getID();
+    tempPair.second = ping(users[i]);
+    distanceTo.push_back(tempPair);
   }
+  send();
 }
-
-void User::addUser(User targetUser){
-
-}
-
 int User::ping(User target){ // [c] frickin forward declarations, I am getting confused by the pointers and stuff
+  if(target.getID() == userID){
+    return 0;
+  }
   int distance = currentCity->getDistance(*(target.getCity()));
   return distance/bandwidth;
   // attempt 2
@@ -38,5 +39,5 @@ int User::ping(User target){ // [c] frickin forward declarations, I am getting c
 }
 
 void User::send(){
-  server->updateUserDistances(userID, distanceTo);
+//  server->updateUserDistances(userID, distanceTo);
 }

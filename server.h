@@ -17,9 +17,11 @@ class Server{
     void addUser(User targetUser);
     void updateMatrix(int value, int row, int col);
     void updateUserDistances(int userID, std::vector<int> distanceTo);
+    void commandUserPing(User pingingUser);
+    void commandUserPing(User pingingUser, User pingedUser);
   private:
     std::vector< std::vector<int> > adjMatrix;
-    std::vector< std::vector<User> > usersDistances;
+    std::vector< std::vector<User> > userGroups;
     std::vector< City > cityList;
     std::vector< User > userList;
 };
