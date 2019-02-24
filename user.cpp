@@ -18,7 +18,7 @@ User::~User(){
 
 // Both pingALL and ping should update addwantedHosts if needed to.
 void User::pingAll(std::vector<User> users){
-  for(int i=0; i<users.size(); i++){
+  for(unsigned int i=0; i<users.size(); i++){
     std::pair<int,int> tempPair;
     tempPair.first = users[i].getID();
     tempPair.second = ping(users[i]);

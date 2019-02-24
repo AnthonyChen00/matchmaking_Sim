@@ -20,7 +20,7 @@ class City{
     int getDistance(City targetCity); // return the distance between this city and targetCity
     void updateDistance(int distance, City targetCity); // update the distance between this city and targetCity
 
-    void addCity(int distance[]); // [b] dont think this is currently neccessary
+    void addCity(int distance[]);
     void removeUser(User targetUser);
     void addUser(User targetUser);
 
