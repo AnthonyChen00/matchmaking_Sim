@@ -5,14 +5,16 @@
                   a
               3->/ \ <- 5
                 b--c
-                  ^ 4
+            6> /  ^4
+              d
 */
 
 /* adjacent matrix repesentation
-    a b c
-  a|0|3|5
-  b|3|0|4
-  c|5|4|0
+    a b c d
+  a|0|3|5|0
+  b|3|0|4|6
+  c|5|4|0|0
+  d|0|6|0|0
 */
 
 void Sim::initialize_Simulator_A(){
@@ -26,11 +28,24 @@ void Sim::initialize_Simulator_A(){
   City c;
   c.setCityNO(3);
   add_city(c);
+  City d;
+  d.setCityNO(4);
+  add_city(d);
 
+  std::vector<City> tempCityList;
+  tempCityList.push_back(a);
+  tempCityList.push_back(b);
+  tempCityList.push_back(c);
+  tempCityList.push_back(d);
   // Initializing Server
-  Server server;
-  
-  //Initialize listOfUsers
+  Server server(tempCityList);
+
+  server.updateMatrix(3,a,b);
+  server.updateMatrix(5,a,c);
+  server.updateMatrix(4,b,c);
+  server.updateMatrix(6,b,d);
+
+  //Add listOfUsers
 
 }
 

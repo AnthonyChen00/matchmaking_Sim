@@ -11,9 +11,9 @@ class User;
 //Server maintains a userlist and tell users to ping other users to update the list
 class Server{
   public:
-    Server();
+    Server(std::vector<City> cities);
     ~Server();
-    void addCity(City new_city){cityList.push_back(new_city);}
+    void addCity(City* new_city){cityList.push_back(*(new_city));}
     void group();
     void removeUser(User targetUser);
     void addUser(User targetUser);

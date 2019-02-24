@@ -1,7 +1,13 @@
 #include "server.h"
 
-Server::Server(){
-
+Server::Server(std::vector<City> cities){
+  for(int i=0;i<cities.size();i++){
+    cityList.push_back(cities[i]);
+  }
+  for(int i=0;i<cities.size();i++){
+    std::vector<int> tempVector(cities.size(),0);
+    adjMatrix.push_back(tempVector);
+  }
 }
 Server::~Server(){
 
