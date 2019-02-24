@@ -16,7 +16,10 @@ class Sim{
     void initialize_Simulator_A();
     void add_city(City newCity);
     void add_user(User newUser);
-    
+    void print_cities();
+    void print_users();
+    void print_Uservector(std::vector<User> printing);
+    void print_adjMatrix();
   private:
     Server server;
     std::vector<City> listOfCities;

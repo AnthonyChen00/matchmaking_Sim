@@ -16,6 +16,7 @@ class City{
     int getCityNo(){return cityNo;}
     void setCityNO(int newCityNo){cityNo = newCityNo;} // update/assign the current City ID
 
+    std::vector<User> getUsers(){return Users;}
     int setAdjMatrix(std::vector< std::vector<int> > desiredMatrix);
     int getDistance(City targetCity); // return the distance between this city and targetCity
     void updateDistance(int distance, City targetCity); // update the distance between this city and targetCity
