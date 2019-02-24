@@ -28,7 +28,6 @@ class User{
     City* getCity(){return currentCity;}
 
     std::vector<User> getWantedHosts(){return wantedHosts;}
-    void removeUser(User targetUser);
     void addWantedHosts(User wantedHost);
 
     // Member Functions
