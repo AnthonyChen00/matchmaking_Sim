@@ -18,12 +18,16 @@ void Server::group(){
 }
 
 void Server::init_city_adjMatrix(){
-
+  for(int i=0; i<cityList.size();i++){
+    cityList[i].setAdjMatrix(adjMatrix);
+  }
 }
 void Server::removeUser(User targetUser){
   //search within the userList for the targetUser ID index of the list
+
   for (unsigned int i = 0; i < userList.size(); i++){
     if (targetUser.getID == userlist[i].getID){
+
       //remove the user from the list
       userlist.erase(i);
     }

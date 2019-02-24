@@ -37,6 +37,7 @@ class User{
     int bandwidth;
     City* currentCity;
     std::vector< std::pair<int,int> > distanceTo;
+    std::vector<User> wantedHosts;
     Server* server;
 };
 

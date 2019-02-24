@@ -44,9 +44,24 @@ void Sim::initialize_Simulator_A(){
   server.updateMatrix(5,a,c);
   server.updateMatrix(4,b,c);
   server.updateMatrix(6,b,d);
-
+  server.init_city_adjMatrix();
   //Add listOfUsers
+  for(int i=0; i<30; i++){
+    int chooser;
+    chooser = i%4; // 4 for the amount of cities.
+    if(chooser == 0){
+      //User addedUser()
+    }
+    else if(chooser == 1){
 
+    }
+    else if(chooser == 2){
+
+    }
+    else if(chooser == 3){
+
+    }
+  }
 }
 
 void Sim::add_city(City newCity){
