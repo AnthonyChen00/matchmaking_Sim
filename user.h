@@ -14,7 +14,7 @@ class Server;
 
 class User{
   public:
-    User(int userID, int bandwidth, Server server, City city);
+    User(int userID, int bandwidth, Server* server, City city);
     ~User();
 
     //Setters and Getters

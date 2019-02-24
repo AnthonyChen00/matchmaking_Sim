@@ -1,9 +1,9 @@
 #include "user.h"
 
 
-User::User(int userID, int bandwidth, Server server, City city){
+User::User(int userID, int bandwidth, Server* server, City city){
   currentCity = &city;
-  this->server = &server;
+  this->server = server;
   this->userID = userID;
   this->bandwidth = bandwidth;
 }
@@ -30,7 +30,9 @@ int User::ping(User target){
   if(target.getID() == userID){
     return 0;
   }
-  int distance = currentCity->getDistance(*(target.getCity()));
+  int distance = server->getDistance(getCity()->getCityNo(),target.getCity()->getCityNo());
+  //int distance = currentCity->getDistance(*(target.getCity()));
+  //std::cout << "Distance is: " << distance << std::endl;
   return distance/bandwidth;
 }
 

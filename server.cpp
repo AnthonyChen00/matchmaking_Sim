@@ -39,7 +39,9 @@ void Server::removeUser(User targetUser){
   }
 }
 
-
+int Server::getDistance(int pingingUserCity, int targetUserCity){
+  return adjMatrix[pingingUserCity][targetUserCity];
+}
 void Server::addUser(User targetUser){
   commandUserPing(targetUser);
   userList.push_back(targetUser);
