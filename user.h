@@ -26,9 +26,10 @@ class User{
     void setBandWidth(int new_bandwidth){bandwidth = new_bandwidth;}
     Server* getServer(){return server;}
     City* getCity(){return currentCity;}
-    void removeUser(User targetUser);
     void addWantedHosts(User wantedHost);
+
     // Member Functions
+    void removeUser(User targetUser);
     int ping(User target);
     void pingAll(std::vector<User> users);
     void send();
@@ -37,7 +38,6 @@ class User{
     int userID;
     int bandwidth;
     City* currentCity;
-    std::vector< std::pair<int,int> > distanceTo;
     std::vector<User> wantedHosts;
     Server* server;
 };

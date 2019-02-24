@@ -9,7 +9,7 @@ City::~City(){
 }
 
 int City::setAdjMatrix(std::vector< std::vector<int> > desiredMatrix){
-  for(int i=0; i<desiredMatrix.size(); i++){
+  for(unsigned int i=0; i<desiredMatrix.size(); i++){
     adjMatrix.push_back(desiredMatrix[i]);
   }
   return 0;
@@ -30,6 +30,10 @@ int City::getDistance(City targetCity){
 //   //add a new city of adjmatrix
 // }
 
+void City::addUser(User targetUser){
+
+}
+
 void City::removeUser(User targetUser){
-  
+
 }

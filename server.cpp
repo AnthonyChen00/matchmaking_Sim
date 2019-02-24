@@ -1,7 +1,7 @@
 #include "server.h"
 
 Server::Server(){
-  
+
 }
 Server::Server(std::vector<City> cities){
   for(unsigned int i=0;i<cities.size();i++){
@@ -26,17 +26,16 @@ void Server::init_city_adjMatrix(){
   }
 }
 void Server::removeUser(User targetUser){
-  //search within the userList for the targetUser ID index of the list
 
   for (unsigned int i = 0; i < userList.size(); i++){
     if (targetUser.getID() == userList[i].getID()){
 
-      //remove the user from the list
       userList.erase(userList.begin() + i);
     }
     else{
       userList[i].removeUser(targetUser);
     }
+    targetUser.getCity()->removeUser(targetUser);
   }
 }
 
