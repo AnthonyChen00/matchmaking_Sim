@@ -2,29 +2,34 @@
 #include <iostream>
 
 /* Simulator consisting of 3 cities (1,2,3) and 3 edges.
-                  1
-              a->/ \ <- b
-                2--3
-                  ^ c
+                  a
+              3->/ \ <- 5
+                b--c
+                  ^ 4
 */
 
 /* adjacent matrix repesentation
-    1 2 3
-  1|0|a|b
-  2|a|0|c
-  3|b|c|0
+    a b c
+  a|0|3|5
+  b|3|0|4
+  c|5|4|0
 */
 
 void Sim::initialize_Simulator_A(){
-
   //Initialize listOfCities
   City a;
+  a.setCityNO(1);
+  add_city(a);
   City b;
+  b.setCityNO(2);
+  add_city(b);
   City c;
-  listOfCities.push_back(a);
-  listOfCities.push_back(b);
-  listOfCities.push_back(c);
+  c.setCityNO(3);
+  add_city(c);
 
+  // Initializing Server
+  Server server;
+  
   //Initialize listOfUsers
 
 }

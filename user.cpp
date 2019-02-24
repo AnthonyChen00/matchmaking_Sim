@@ -16,7 +16,6 @@ User::~User(){
   }
 }
 
-<<<<<<< HEAD
 void User::pingAll(std::vector<User> users){
   for(int i=0; i<users.size(); i++){
     std::pair<int,int> tempPair;
@@ -30,18 +29,6 @@ int User::ping(User target){ // [c] frickin forward declarations, I am getting c
   if(target.getID() == userID){
     return 0;
   }
-=======
-void User::removeUser(User targetUser){
-  //removing an user would removes from distanceTo vector
-}
-
-void User::addUser(User targetUser){
-  int distance = ping(targetUser);
-  distanceTo.push_back(distance);
-}
-
-int User::ping(User target){
->>>>>>> 21b25e7d6405a6859a4cb8ed7ff63dc3843352fe
   int distance = currentCity->getDistance(*(target.getCity()));
   return distance/bandwidth;
 }

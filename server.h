@@ -13,6 +13,7 @@ class Server{
   public:
     Server();
     ~Server();
+    void addCity(City new_city){cityList.push_back(new_city);}
     void group();
     void removeUser(User targetUser);
     void addUser(User targetUser);
@@ -22,10 +23,7 @@ class Server{
     void commandUserPing(User pingingUser, User pingedUser);
   private:
     std::vector< std::vector<int> > adjMatrix;
-<<<<<<< HEAD
     std::vector< std::vector<User> > userGroups;
-=======
->>>>>>> 21b25e7d6405a6859a4cb8ed7ff63dc3843352fe
     std::vector< City > cityList;
     std::vector< User > userList;
 };
