@@ -15,11 +15,13 @@ class Sim{
     ~Sim();
     void initialize_Simulator_A();
     void add_city(City newCity);
+    void add_user(User newUser);
+    
   private:
     Server server;
     std::vector<City> listOfCities;
     std::vector<User> listOfUsers;
-    std::vector< std::vector<int> > adjMatrix; // [a]: used for the construction of cities, need to figure out how to set matrix of vectors as argument for function, may need to use pointers or something 
+    std::vector< std::vector<int> > adjMatrix;
 
   };
 

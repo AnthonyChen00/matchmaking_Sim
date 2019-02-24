@@ -16,25 +16,17 @@ User::~User(){
 }
 
 void User::removeUser(User targetUser){
-  for(int i=0; i<userList.size(); ++i){
-    if(targetUser.getID() == userList[i].getID()){
-      userList.erase(i);
-    }
-  }
+  //removing an user would removes from distanceTo vector
 }
 
 void User::addUser(User targetUser){
-
+  int distance = ping(targetUser);
+  distanceTo.push_back(distance);
 }
 
-int User::ping(User target){ // [c] frickin forward declarations, I am getting confused by the pointers and stuff
+int User::ping(User target){
   int distance = currentCity->getDistance(*(target.getCity()));
   return distance/bandwidth;
-  // attempt 2
-  // City temp = target.getCity();
-  // int distance = temp.getDistance(this->getCity());
-  // return distance;
-  // // return target.getBandwidth() + target.getCity()->getDistance(target.getCity()); //original attempt
 }
 
 void User::send(){

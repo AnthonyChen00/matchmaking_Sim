@@ -8,6 +8,7 @@
 class City;
 class User;
 
+//Server maintains a userlist and tell users to ping other users to update the list
 class Server{
   public:
     Server();
@@ -15,11 +16,10 @@ class Server{
     void group();
     void removeUser(User targetUser);
     void addUser(User targetUser);
-    void updateMatrix(int value, int row, int col);
+    void updateMatrix(int distance, City cityOne, City cityTwo); //updating the adjacent matrix
     void updateUserDistances(int userID, std::vector<int> distanceTo);
   private:
     std::vector< std::vector<int> > adjMatrix;
-    std::vector< std::vector<User> > usersDistances;
     std::vector< City > cityList;
     std::vector< User > userList;
 };

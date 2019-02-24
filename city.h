@@ -21,12 +21,12 @@ class City{
     int setAdjMatrix();
     int getDistance(City targetCity); // return the distance between this city and targetCity
     void updateDistance(int distance, City targetCity); // update the distance between this city and targetCity
-    void addCity(int distance[]); // [b] dont think this is currently neccessary
+    void addCity(int distance[]); 
 
 
   private:
     std::vector<User> Users;
-    std::vector< std::vector<int> > adjMatrix; // [a]: should be shared among all the cities, should the simulator update/maintain the matrix completely?
+    std::vector< std::vector<int> > adjMatrix;
     int cityNo;
 };
 
