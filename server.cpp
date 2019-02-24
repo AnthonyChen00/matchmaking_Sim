@@ -26,16 +26,16 @@ void Server::removeUser(User targetUser){
   //search within the userList for the targetUser ID index of the list
 
   for (unsigned int i = 0; i < userList.size(); i++){
-    if (targetUser.getID == userlist[i].getID){
+    if (targetUser.getID() == userList[i].getID()){
 
       //remove the user from the list
-      userlist.erase(i);
+      userList.erase(i);
     }
     else{
       userList[i].removeUser(targetUser);
     }
   }
-  City targetUserCity = targetUser.getCity;
+  City targetUserCity = targetUser.getCity();
   targetUserCity.removeUser(targetUser);
   }
 }
