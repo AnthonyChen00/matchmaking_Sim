@@ -16,6 +16,7 @@ User::~User(){
   }
 }
 
+// Both pingALL and ping should update addwantedHosts if needed to.
 void User::pingAll(std::vector<User> users){
   for(int i=0; i<users.size(); i++){
     std::pair<int,int> tempPair;
@@ -29,10 +30,16 @@ int User::ping(User target){ // [c] frickin forward declarations, I am getting c
   if(target.getID() == userID){
     return 0;
   }
+
   int distance = currentCity->getDistance(*(target.getCity()));
   return distance/bandwidth;
 }
 
+void User::addWantedHosts(User wantedHost){
+  wantedHosts.push_back(wantedHost);
+  send();
+}
+// Use whenever wantedHosts is changed, so when hosts are added and when hosts are removed
 void User::send(){
-//  server->updateUserDistances(userID, distanceTo);
+  server->updateUserWanted(userID, wantedHosts);
 }

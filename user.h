@@ -26,7 +26,7 @@ class User{
     void setBandWidth(int new_bandwidth){bandwidth = new_bandwidth;}
     Server* getServer(){return server;}
     City* getCity(){return currentCity;}
-
+    void addWantedHosts(User wantedHost);
     // Member Functions
     int ping(User target);
     void pingAll(std::vector<User> users);
@@ -37,6 +37,7 @@ class User{
     int bandwidth;
     City* currentCity;
     std::vector< std::pair<int,int> > distanceTo; //need a method of knowing which user is to where - how will we distingush who this one guy is connected to?
+    std::vector<User> wantedHosts;
     Server* server;
 };
 

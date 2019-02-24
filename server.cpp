@@ -17,6 +17,9 @@ void Server::group(){
 
 }
 
+void Server::init_city_adjMatrix(){
+
+}
 void Server::removeUser(User targetUser){
   // search through the entire userList for targetUser. After deleting user,
   //update all past user's ID
@@ -40,12 +43,7 @@ void Server::addUser(User targetUser){
     commandUserPing(userList[i],targetUser);
   }
 }
-
-void Server::updateMatrix(int value, int row, int col){
-  adjMatrix[row][col] = value;
-}
-
-void updateMatrix(int distance, City cityOne, City cityTwo){
+void Server::updateMatrix(int distance, City cityOne, City cityTwo){
   int cityOneId = cityOne.getCityNo();
   int cityTwoId = cityTwo.getCityNo();
   adjMatrix[cityOneId][cityTwoId] = distance;
