@@ -15,7 +15,6 @@ class Server{
     ~Server();
     void addCity(City* new_city){cityList.push_back(*(new_city));}
     void group();
-    void removeUser(User targetUser);
     void addUser(User targetUser);
     void updateMatrix(int distance, City cityOne, City cityTwo); //updating the adjacent matrix
     void updateUserDistances(int userID, std::vector<int> distanceTo);

@@ -17,6 +17,9 @@ void Server::group(){
 
 }
 
+void Server::init_city_adjMatrix(){
+
+}
 void Server::removeUser(User targetUser){
   //search within the userList for the targetUser ID index of the list
   for (int i = 0; i < userList.size(); i++){
@@ -31,7 +34,7 @@ void Server::removeUser(User targetUser){
   }
   City targetUserCity = targetUser.getCity;
   targetUserCity.removeUser(targetUser);
-  
+
 
   }
   //remove the targetUser's distance from everyone else's distance
@@ -45,8 +48,6 @@ void Server::addUser(User targetUser){
     commandUserPing(userList[i],targetUser);
   }
 }
-
-
 void Server::updateMatrix(int distance, City cityOne, City cityTwo){
   int cityOneId = cityOne.getCityNo();
   int cityTwoId = cityTwo.getCityNo();
