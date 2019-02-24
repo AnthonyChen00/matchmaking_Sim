@@ -36,7 +36,7 @@ class User{
     int userID;
     int bandwidth;
     City* currentCity;
-    std::vector< std::pair<int,int> > distanceTo; //need a method of knowing which user is to where - how will we distingush who this one guy is connected to?
+    std::vector< std::pair<int,int> > distanceTo;
     Server* server;
 };
 

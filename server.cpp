@@ -18,19 +18,24 @@ void Server::group(){
 }
 
 void Server::removeUser(User targetUser){
-  // search through the entire userList for targetUser. After deleting user,
-  //update all past user's ID
-  bool removed = false;
-  for(int i=0; i<userList.size(); ++i){
-    userList[i].removedUser(targetUser);
-    if (removed){
-      userList[i].setID(i);
-    }
-    if(targetUser.getID() == userList[i].getID()){
-      userList.erase(userList.begin() + i);
+  //search within the userList for the targetUser ID index of the list
+  for (int i = 0; i < userList.size(); i++){
+    if (targetUser.getID == userlist[i].getID){
+      //remove the user from the list
+      userlist.erase(i);
+      break;
     }
   }
-  // Have to update other users Lists.
+  for (int i = 0; i < userList.size(); i++){
+
+  }
+  City targetUserCity = targetUser.getCity;
+  targetUserCity.removeUser(targetUser);
+  
+
+  }
+  //remove the targetUser's distance from everyone else's distance
+  //remove from group?
 }
 
 void Server::addUser(User targetUser){
@@ -41,11 +46,8 @@ void Server::addUser(User targetUser){
   }
 }
 
-void Server::updateMatrix(int value, int row, int col){
-  adjMatrix[row][col] = value;
-}
 
-void updateMatrix(int distance, City cityOne, City cityTwo){
+void Server::updateMatrix(int distance, City cityOne, City cityTwo){
   int cityOneId = cityOne.getCityNo();
   int cityTwoId = cityTwo.getCityNo();
   adjMatrix[cityOneId][cityTwoId] = distance;

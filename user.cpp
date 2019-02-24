@@ -25,7 +25,7 @@ void User::pingAll(std::vector<User> users){
   }
   send();
 }
-int User::ping(User target){ // [c] frickin forward declarations, I am getting confused by the pointers and stuff
+int User::ping(User target){
   if(target.getID() == userID){
     return 0;
   }
