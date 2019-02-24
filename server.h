@@ -11,6 +11,7 @@ class User;
 //Server maintains a userlist and tell users to ping other users to update the list
 class Server{
   public:
+    Server();
     Server(std::vector<City> cities);
     ~Server();
     void init_city_adjMatrix();

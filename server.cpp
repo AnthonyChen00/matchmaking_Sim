@@ -1,5 +1,8 @@
 #include "server.h"
 
+Server::Server(){
+  
+}
 Server::Server(std::vector<City> cities){
   for(unsigned int i=0;i<cities.size();i++){
     cityList.push_back(cities[i]);
