@@ -25,6 +25,8 @@ class City{
     void removeUser(User targetUser);
     void addUser(User targetUser);
 
+    void printAdjMatrix();
+
   private:
     std::vector<User> Users;
     std::vector< std::vector<int> > adjMatrix; // [a]: should be shared among all the cities, should the simulator update/maintain the matrix completely?

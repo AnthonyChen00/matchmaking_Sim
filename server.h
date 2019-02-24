@@ -18,6 +18,7 @@ class Server{
     void group();
 
     void addCity(City* new_city){cityList.push_back(*(new_city));}
+    std::vector<City> getCityList(){return cityList;}
     void addUser(User targetUser);
     void removeUser(User targetUser);
 

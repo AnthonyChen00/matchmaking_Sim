@@ -14,6 +14,15 @@ int City::setAdjMatrix(std::vector< std::vector<int> > desiredMatrix){
   }
   return 0;
 }
+void City::printAdjMatrix(){
+  std::cout << " in printAdjMatrix" << std::endl;
+  for(int i=0;i<adjMatrix.size();i++){
+    for(int j=0; j<adjMatrix.size();j++){
+      std::cout << adjMatrix[i][j] << " ";
+    }
+    std::cout << std::endl;
+  }
+}
 void City::updateDistance(int distance, City targetCity){
   //remove the value of the city and then put it back
   int targetCityId = targetCity.getCityNo();

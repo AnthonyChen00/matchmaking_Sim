@@ -59,9 +59,15 @@ void Sim::initialize_Simulator_A(){
   server.updateMatrix(5,a,c);
   server.updateMatrix(4,b,c);
   server.updateMatrix(6,b,d);
+  server.updateMatrix(9,a,d);
+  server.updateMatrix(10,c,d);
   std::cout << "PART C" << std::endl;
   server.init_city_adjMatrix();
 
+  server.getCityList().at(0).printAdjMatrix();
+  server.getCityList().at(1).printAdjMatrix();
+  server.getCityList().at(2).printAdjMatrix();
+  server.getCityList().at(3).printAdjMatrix();
   std::cout << "PART D" << std::endl;
   //Add listOfUsers
   for(int i=0; i<NUMBEROFUSERS; i++){
@@ -69,22 +75,22 @@ void Sim::initialize_Simulator_A(){
     chooser = i%4; // 4 for the amount of cities.
     std::cout << "PART E " << i << std::endl;
     if(chooser == 0){
-      User addedUser(i%NUMBEROFUSERS,10,server,a);
+      User addedUser(i%NUMBEROFUSERS,10,server,server.getCityList().at(0));
       std::cout << i << std::endl;
       server.addUser(addedUser);
     }
     else if(chooser == 1){
-      User addedUser(i%NUMBEROFUSERS,10,server,b);
+      User addedUser(i%NUMBEROFUSERS,10,server,server.getCityList().at(1));
       std::cout << i << std::endl;
       server.addUser(addedUser);
     }
     else if(chooser == 2){
-      User addedUser(i%NUMBEROFUSERS,10,server,c);
+      User addedUser(i%NUMBEROFUSERS,10,server,server.getCityList().at(2));
       std::cout << i << std::endl;
       server.addUser(addedUser);
     }
     else if(chooser == 3){
-      User addedUser(i%NUMBEROFUSERS,10,server,d);
+      User addedUser(i%NUMBEROFUSERS,10,server,server.getCityList().at(3));
       std::cout << i << std::endl;
       server.addUser(addedUser);
     }
