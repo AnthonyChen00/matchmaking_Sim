@@ -14,18 +14,18 @@ class Server;
 
 class User{
   public:
-    User(int userID, int bandwidth, Server* server, City city);
+    User(int userID, int bandwidth, Server* server, int cityID);
     ~User();
 
     //Setters and Getters
     int getID(){return userID;}
     void setID(int new_ID){userID = new_ID;}
-    void setCity(City* newCity){currentCity = newCity;}
+    void setCity(int newCityId){cityID = newCityId;}
     void setServer(Server* newServer){server = newServer;}
     int getBandwidth(){return bandwidth;}
     void setBandWidth(int new_bandwidth){bandwidth = new_bandwidth;}
     Server* getServer(){return server;}
-    City* getCity(){return currentCity;}
+    int getCity(){return cityID;}
 
     std::vector<User> getWantedHosts(){return wantedHosts;}
     void addWantedHosts(User wantedHost);
@@ -39,7 +39,7 @@ class User{
   private:
     int userID;
     int bandwidth;
-    City* currentCity;
+    int cityID;
     std::vector<User> wantedHosts;
     Server* server;
 };

@@ -30,9 +30,9 @@ void City::updateDistance(int distance, City targetCity){
   adjMatrix[cityNo][targetCityId] = distance;
 }
 
-int City::getDistance(City targetCity){
+int City::getDistance(int cityID){
   //return the distance of city - related to user.h ping function
-  return(adjMatrix[cityNo][targetCity.getCityNo()]);
+  return(adjMatrix[cityNo][cityID]);
 }
 
 // void City::addCity(int distance[]){
