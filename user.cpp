@@ -10,7 +10,7 @@ User::User(int userID, int bandwidth, Server* server, int city){
 
 User::~User(){
   server = NULL;
-  currentCity = 0;
+  cityID = 0;
   while(!wantedHosts.empty()){
     wantedHosts.pop_back();
   }

@@ -32,16 +32,16 @@ Sim::~Sim(){
 void Sim::initialize_Simulator_A(){
   //Initialize listOfCities
   City a;
-  a.setCityNO(0);
+  a.setCityNo(0);
   add_city(a);
   City b;
-  b.setCityNO(1);
+  b.setCityNo(1);
   add_city(b);
   City c;
-  c.setCityNO(2);
+  c.setCityNo(2);
   add_city(c);
   City d;
-  d.setCityNO(3);
+  d.setCityNo(3);
   add_city(d);
 
   std::cout << "PART A" << std::endl;
@@ -74,19 +74,19 @@ void Sim::initialize_Simulator_A(){
     int chooser;
     chooser = i%4; // 4 for the amount of cities.
     if(chooser == 0){
-      User addedUser(i%NUMBEROFUSERS,10,&server,server.getCityList().at(0));
+      User addedUser(i%NUMBEROFUSERS,10,&server,0);
       server.addUser(addedUser);
     }
     else if(chooser == 1){
-      User addedUser(i%NUMBEROFUSERS,10,&server,server.getCityList().at(1));
+      User addedUser(i%NUMBEROFUSERS,10,&server,1);
       server.addUser(addedUser);
     }
     else if(chooser == 2){
-      User addedUser(i%NUMBEROFUSERS,10,&server,server.getCityList().at(2));
+      User addedUser(i%NUMBEROFUSERS,10,&server,2);
       server.addUser(addedUser);
     }
     else if(chooser == 3){
-      User addedUser(i%NUMBEROFUSERS,10,&server,server.getCityList().at(3));
+      User addedUser(i%NUMBEROFUSERS,10,&server,3);
       server.addUser(addedUser);
     }
   }

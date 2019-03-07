@@ -35,7 +35,7 @@ void Server::removeUser(User targetUser){
     else{
       userList[i].removeUser(targetUser);
     }
-    targetUser.getCity()->removeUser(targetUser);
+    cityList.at(targetUser.getCity()).removeUser(targetUser);
   }
 }
 
