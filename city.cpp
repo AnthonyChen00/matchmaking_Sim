@@ -40,7 +40,7 @@ int City::getDistance(int cityID){
 // }
 
 void City::addUser(User targetUser){
-
+  Users.push_back(targetUser);
 }
 
 void City::removeUser(User targetUser){

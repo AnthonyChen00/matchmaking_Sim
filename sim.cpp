@@ -45,7 +45,7 @@ void Sim::initialize_Simulator_A(){
   add_city(d);
 
   std::cout << "PART A" << std::endl;
-
+  //creating cities
   std::vector<City> tempCityList;
   tempCityList.push_back(a);
   tempCityList.push_back(b);
@@ -55,6 +55,7 @@ void Sim::initialize_Simulator_A(){
   Server server(tempCityList);
 
   std::cout << "PART B" << std::endl;
+  //creating the distance matrix of all cities
   server.updateMatrix(3,a,b);
   server.updateMatrix(5,a,c);
   server.updateMatrix(4,b,c);
@@ -62,32 +63,37 @@ void Sim::initialize_Simulator_A(){
   server.updateMatrix(9,a,d);
   server.updateMatrix(10,c,d);
   std::cout << "PART C" << std::endl;
+  //updating the distance matrix of all the cities
   server.init_city_adjMatrix();
-
   server.getCityList().at(0).printAdjMatrix();
   server.getCityList().at(1).printAdjMatrix();
   server.getCityList().at(2).printAdjMatrix();
   server.getCityList().at(3).printAdjMatrix();
+
   std::cout << "PART D" << std::endl;
-  //Add listOfUsers
+  //create users and adding them to list of users
   for(int i=0; i<NUMBEROFUSERS; i++){
     int chooser;
     chooser = i%4; // 4 for the amount of cities.
     if(chooser == 0){
       User addedUser(i%NUMBEROFUSERS,10,&server,0);
       server.addUser(addedUser);
+      listOfCities[0].addUser(addedUser);
     }
     else if(chooser == 1){
       User addedUser(i%NUMBEROFUSERS,10,&server,1);
       server.addUser(addedUser);
-    }
+      listOfCities[1].addUser(addedUser);
+  }
     else if(chooser == 2){
       User addedUser(i%NUMBEROFUSERS,10,&server,2);
       server.addUser(addedUser);
+      listOfCities[2].addUser(addedUser);
     }
     else if(chooser == 3){
       User addedUser(i%NUMBEROFUSERS,10,&server,3);
       server.addUser(addedUser);
+      listOfCities[3].addUser(addedUser);
     }
   }
 }
@@ -101,14 +107,14 @@ void Sim::add_user(User newUser){
 
 void Sim::print_cities(){
   for(int i=0; i<listOfCities.size();i++){
-    std::printf("City %d with these users: ", listOfCities[i].getCityNo());
+    std::printf("City %d with these users: \n", listOfCities[i].getCityNo());
     print_Uservector(listOfCities[i].getUsers());
     std::cout << std::endl;
   }
 }
 
 void Sim::print_users(){
-
+  
 }
 void Sim::print_Uservector(std::vector<User> printing){
   for(int i=0; i<printing.size();i++){

@@ -4,6 +4,7 @@ Server::Server(){
 
 }
 Server::Server(std::vector<City> cities){
+  //constructor for a server object
   for(unsigned int i=0;i<cities.size();i++){
     cityList.push_back(cities[i]);
   }
@@ -21,6 +22,7 @@ void Server::group(){
 }
 
 void Server::init_city_adjMatrix(){
+  //creating a adjMatrix
   for(unsigned int i=0; i<cityList.size();i++){
     cityList[i].setAdjMatrix(adjMatrix);
   }
