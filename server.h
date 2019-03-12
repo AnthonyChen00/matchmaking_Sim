@@ -8,6 +8,7 @@
 class City;
 class User;
 
+#define DESIRED_PING 5
 //Server maintains a userlist and tell users to ping other users to update the list
 class Server{
   public:
@@ -19,6 +20,9 @@ class Server{
 
     void addCity(City* new_city){cityList.push_back(*(new_city));}
     std::vector<City> getCityList(){return cityList;}
+    std::vector<User> getUserList(){return userList;}
+    void printCity();
+    void printUsers();
     void addUser(User targetUser);
     void removeUser(User targetUser);
     int getDistance(int pingingUserCity, int targetUserCity);

@@ -26,7 +26,7 @@ class User{
     void setBandWidth(int new_bandwidth){bandwidth = new_bandwidth;}
     Server* getServer(){return server;}
     int getCity(){return cityID;}
-
+    void setWantedHosts(std::vector<User> usersWanted);
     std::vector<User> getWantedHosts(){return wantedHosts;}
     void addWantedHosts(User wantedHost);
 
