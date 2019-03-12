@@ -50,9 +50,6 @@ void User::removeUser(User targetUser){
 
 void User::addWantedHosts(User wantedHost){
   wantedHosts.push_back(wantedHost);
-  for(int i=0; i<wantedHosts.size(); i++){
-    printf("%d is this host %d", i,wantedHosts[i].getID());
-  }
   send();
 }
 

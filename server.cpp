@@ -58,14 +58,19 @@ int Server::getDistance(int pingingUserCity, int targetUserCity){
   return adjMatrix[pingingUserCity][targetUserCity];
 }
 void Server::addUser(User targetUser){
-  // for(unsigned int i=0; i< userList.size();i++){
-  //   commandUserPing(userList[i],targetUser);
-  // }
-  printf("SIZE OF USERLIST IS %d", userList.size());
   userList.push_back(targetUser);
+  int loc = userList.size()- 1;
   for(unsigned int i=0; i< userList.size();i++){
-    commandUserPing(targetUser,userList[i]);
+    commandUserPing(userList[i],userList[loc]);
   }
+
+  for(unsigned int i=0; i< userList.size();i++){
+    commandUserPing(userList[loc],userList[i]);
+  }
+  if(userList.size() > 5)
+    matchmake();
+}
+void Server::matchmake(){
 
 }
 void Server::updateMatrix(int distance, City cityOne, City cityTwo){

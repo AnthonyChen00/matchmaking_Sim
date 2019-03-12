@@ -95,13 +95,13 @@ void Sim::initialize_Simulator_A(){
     }
   }
   server.printUsers();
-  for(int i=0; i<server.getUserList().size();i++){
-    printf("UserID %d with these desired hosts:", server.getUserList().at(i).getID());
-    for(int j=0; j<server.getUserList().at(i).getWantedHosts().size();j++){
-      printf("%d ", server.getUserList().at(i).getWantedHosts().at(j).getID());
-    }
-    printf("\n");
-  }
+  // for(int i=0; i<server.getUserList().size();i++){
+  //   printf("UserID %d with these desired hosts:", server.getUserList().at(i).getID());
+  //   for(int j=0; j<server.getUserList().at(i).getWantedHosts().size();j++){
+  //     printf("%d ", server.getUserList().at(i).getWantedHosts().at(j).getID());
+  //   }
+  //   printf("\n");
+  // }
 }
 
 void Sim::add_city(City newCity){
