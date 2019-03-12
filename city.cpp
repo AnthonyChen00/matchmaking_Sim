@@ -16,8 +16,8 @@ int City::setAdjMatrix(std::vector< std::vector<int> > desiredMatrix){
 }
 void City::printAdjMatrix(){
   std::cout << " in printAdjMatrix" << std::endl;
-  for(int i=0;i<adjMatrix.size();i++){
-    for(int j=0; j<adjMatrix.size();j++){
+  for(unsigned int i=0;i<adjMatrix.size();i++){
+    for(unsigned int j=0; j<adjMatrix.size();j++){
       std::cout << adjMatrix[i][j] << " ";
     }
     std::cout << std::endl;
@@ -44,5 +44,10 @@ void City::addUser(User targetUser){
 }
 
 void City::removeUser(User targetUser){
-
+  for (unsigned int i = 0; i < Users.size(); i++){
+    if (targetUser.getID() == Users[i].getID()){
+      Users.erase(Users.begin()+i);
+      break;
+    }
+  }
 }

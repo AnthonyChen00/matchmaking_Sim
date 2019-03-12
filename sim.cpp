@@ -70,28 +70,32 @@ void Sim::initialize_Simulator_A(){
 
   std::cout << "PART D" << std::endl;
   //create users and adding them to list of users
-  for(int i=0; i<NUMBEROFUSERS; i++){
+  for(unsigned int i=0; i<NUMBEROFUSERS; i++){
     int chooser;
     chooser = i%4; // 4 for the amount of cities.
     if(chooser == 0){
       User addedUser(i%NUMBEROFUSERS,1,&server,0);
       server.addUser(addedUser);
       listOfCities[0].addUser(addedUser);
+      listOfUsers.push_back(addedUser);
     }
     else if(chooser == 1){
       User addedUser(i%NUMBEROFUSERS,1,&server,1);
       server.addUser(addedUser);
       listOfCities[1].addUser(addedUser);
+      listOfUsers.push_back(addedUser);
   }
     else if(chooser == 2){
       User addedUser(i%NUMBEROFUSERS,1,&server,2);
       server.addUser(addedUser);
       listOfCities[2].addUser(addedUser);
+      listOfUsers.push_back(addedUser);
     }
     else if(chooser == 3){
       User addedUser(i%NUMBEROFUSERS,1,&server,3);
       server.addUser(addedUser);
       listOfCities[3].addUser(addedUser);
+      listOfUsers.push_back(addedUser);
     }
   }
   server.printUsers();
@@ -120,27 +124,42 @@ void Sim::print_cities(Server server){
 }
 
 void Sim::print_users(){
-
+  std::printf("User List:\n");
+  for (unsigned int i = 0; i < listOfUsers.size();i++){
+    std::printf("%d\n",listOfUsers[i].getID());
+  }
 }
+
 void Sim::print_Uservector(std::vector<User> printing){
-  for(int i=0; i<printing.size();i++){
+  for(unsigned int i=0; i<printing.size();i++){
     std::printf("UserID %d with these desired hosts:", printing[i].getID());
-    for(int j=0; j<printing[i].getWantedHosts().size();j++){
+    for(unsigned int j=0; j<printing[i].getWantedHosts().size();j++){
       std::printf("%d ", printing[i].getWantedHosts().at(j).getID());
     }
     std::cout << std::endl;
   }
 }
+
 void Sim::print_adjMatrix(){
-  for (int i = 0; i < adjMatrix.size(); ++i){
-    for (int j = 0; j < adjMatrix[0].size(); ++j){
+  for (unsigned int i = 0; i < adjMatrix.size(); ++i){
+    for (unsigned int j = 0; j < adjMatrix[0].size(); ++j){
       std::cout << adjMatrix[i][j] << ' ';
     }
     std::cout << std::endl;
   }
 }
+
+void Sim::simulate_loss(){
+  printf("Simulating removing user from all objects...\n");
+  printf("Removing user %d, from city %d\n",listOfUsers[1].getID(), listOfUsers[1].getCity());
+  server.removeUser(listOfUsers[1]);
+
+
+}
+
 int main(){
   Sim simulator_a;
   simulator_a.initialize_Simulator_A();
-  //simulator_a.print_cities();
+  // simulator_a.simulate_loss();
+  simulator_a.print_cities();
 }

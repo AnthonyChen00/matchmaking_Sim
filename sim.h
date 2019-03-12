@@ -20,6 +20,8 @@ class Sim{
     void print_users();
     void print_Uservector(std::vector<User> printing);
     void print_adjMatrix();
+    void simulate_loss();
+
   private:
     Server server;
     std::vector<City> listOfCities;
