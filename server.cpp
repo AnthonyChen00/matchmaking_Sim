@@ -41,6 +41,7 @@ void Server::init_city_adjMatrix(){
   }
 }
 void Server::removeUser(User targetUser){
+
   for (unsigned int i = 0; i < userList.size(); i++){
     if (targetUser.getID() == userList[i].getID()){
 
@@ -70,7 +71,11 @@ void Server::addUser(User targetUser){
     matchmake();
 }
 void Server::matchmake(){
+  for(int i=0; i<userList.size();i++){
+    for(int j=0;j<userList[i].getWantedHosts().size();j++){
 
+    }
+  }
 }
 void Server::updateMatrix(int distance, City cityOne, City cityTwo){
   int cityOneId = cityOne.getCityNo();
