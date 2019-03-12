@@ -6,10 +6,6 @@ Server::Server(){
 Server::Server(std::vector<City> cities){
   //constructor for a server object
   for(unsigned int i=0;i<cities.size();i++){
-    printf("cities[%d] has cityno of %d", i, cities[i].getCityNo());
-    cityList.push_back(cities[i]);
-  }
-  for(unsigned int i=0;i<cities.size();i++){
     std::vector<int> tempVector(cities.size(),0);
     adjMatrix.push_back(tempVector);
   }
@@ -20,6 +16,14 @@ Server::~Server(){
 
 void Server::group(){
 
+}
+
+void Server::init_cities(std::vector<City> cities){
+  for(unsigned int i=0;i<cities.size();i++){
+    std::vector<int> tempVector(cities.size(),0);
+    cityList.push_back(cities[i]);
+    adjMatrix.push_back(tempVector);
+  }
 }
 
 void Server::printCity(){
@@ -43,7 +47,6 @@ void Server::init_city_adjMatrix(){
 void Server::removeUser(User targetUser){
   for (unsigned int i = 0; i < userList.size(); i++){
     if (targetUser.getID() == userList[i].getID()){
-
       userList.erase(userList.begin() + i);
     }
     else{

@@ -21,6 +21,7 @@ class Server{
     void addCity(City* new_city){cityList.push_back(*(new_city));}
     std::vector<City> getCityList(){return cityList;}
     std::vector<User> getUserList(){return userList;}
+    void init_cities(std::vector<City> cities);
     void printCity();
     void printUsers();
     void addUser(User targetUser);

@@ -52,7 +52,8 @@ void Sim::initialize_Simulator_A(){
   tempCityList.push_back(c);
   tempCityList.push_back(d);
   // Initializing Server
-  Server server(tempCityList);
+  // Server server(tempCityList);
+  server.init_cities(tempCityList);
 
   std::cout << "PART B" << std::endl;
   //creating the distance matrix of all cities
@@ -65,7 +66,6 @@ void Sim::initialize_Simulator_A(){
   std::cout << "PART C" << std::endl;
   //updating the distance matrix of all the cities
   server.init_city_adjMatrix();
-  server.printCity();
 
 
   std::cout << "PART D" << std::endl;
@@ -98,14 +98,6 @@ void Sim::initialize_Simulator_A(){
       listOfUsers.push_back(addedUser);
     }
   }
-  server.printUsers();
-  // for(int i=0; i<server.getUserList().size();i++){
-  //   printf("UserID %d with these desired hosts:", server.getUserList().at(i).getID());
-  //   for(int j=0; j<server.getUserList().at(i).getWantedHosts().size();j++){
-  //     printf("%d ", server.getUserList().at(i).getWantedHosts().at(j).getID());
-  //   }
-  //   printf("\n");
-  // }
 }
 
 void Sim::add_city(City newCity){
@@ -115,27 +107,27 @@ void Sim::add_user(User newUser){
   listOfUsers.push_back(newUser);
 }
 
-void Sim::print_cities(Server server){
+void Sim::print_cities(){
   for(int i=0; i<server.getCityList().size();i++){
-    std::printf("City %d with these users: \n", server.getCityList().at(i).getCityNo());
+    printf("City %d with these users: \n", server.getCityList().at(i).getCityNo());
     print_Uservector(server.getCityList().at(i).getUsers());
     std::cout << std::endl;
   }
 }
 
 void Sim::print_users(){
-  std::printf("User List:\n");
+  printf("User List:\n");
   for (unsigned int i = 0; i < listOfUsers.size();i++){
-    std::printf("%d\n",listOfUsers[i].getID());
+    printf("%d\n",listOfUsers[i].getID());
   }
 }
 
 void Sim::print_Uservector(std::vector<User> printing){
   for(unsigned int i=0; i<printing.size();i++){
-    std::printf("UserID %d with these desired hosts:", printing[i].getID());
-    for(unsigned int j=0; j<printing[i].getWantedHosts().size();j++){
-      std::printf("%d ", printing[i].getWantedHosts().at(j).getID());
-    }
+    printf("UserID %d with these desired hosts:", printing[i].getID());
+    // for(unsigned int j=0; j<printing[i].getWantedHosts().size();j++){
+    //   std::printf("%d ", printing[i].getWantedHosts().at(j).getID());
+    // }
     std::cout << std::endl;
   }
 }

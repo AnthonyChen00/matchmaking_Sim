@@ -32,9 +32,9 @@ int User::ping(User target){
     return 0;
   }
   int distance = server->getDistance(getCity(),target.getCity());
-  printf("The distance: %d and the bandwidth: %d and the DESIRED_PING is %d \n", distance,bandwidth,DESIRED_PING);
+  // printf("The distance: %d and the bandwidth: %d and the DESIRED_PING is %d \n", distance,bandwidth,DESIRED_PING);
   if(distance/bandwidth < DESIRED_PING){
-    printf("added \n");
+    // printf("added \n");
     addWantedHosts(target);
   }
   return 1;
