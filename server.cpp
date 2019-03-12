@@ -75,7 +75,7 @@ void Server::addUser(User targetUser){
     matchmake();
 }
 void Server::matchmake(){
-  std::vector< std::pair<int,int> >count;
+  std::vector< std::pair<int, std::vector<int> > >count;
   int target =0;
   int found = 0;
   for(unsigned int i=0; i<userList.size(); i++){
@@ -84,17 +84,19 @@ void Server::matchmake(){
       for(unsigned int k=0; k<count.size(); k++){
         if(count.at(k).first == userList[i].getWantedHosts().at(j).getID()){
           found = 1;
-          count.at(k).second = count.at(k).second + 1;
-          if(count.at(k).second >= 4){
-            target = count.at(k).first;
-            // printf("USER %d HAS BROKEN FORMATION", count.at(k).first);
+          count.at(k).second.push_back(userList[i].getID());
+          if(count.at(k).second.size() >= 4){
+            target = k;
+            printf("USER %d HAS BROKEN FORMATION", count.at(k).first);
             break;
           }
           break;
         }
       }
       if(found == 0){
-        count.push_back(std::pair<int,int>(userList[i].getWantedHosts().at(j).getID(),1));
+        std::vector<int> tempVector;
+        tempVector.push_back(userList[i].getID());
+        count.push_back(std::pair<int, std::vector<int>>(userList[i].getWantedHosts().at(j).getID(),tempVector));
       }
       if(target!= 0){
         break;
@@ -105,6 +107,26 @@ void Server::matchmake(){
     }
   }
 
+  //printf("These users: ");
+  for(int i=0; i<count.at(target).second.size();i++){
+    //printf("%d",count.at(target).second.at(i));
+    for(int j=0;j<userList.size();j++){
+      if(i==0){
+        if(userList[j].getID() == count.at(target).first){
+          removeUser(userList[j]);
+          printf("in special case");
+          printf("removed userid %d",count.at(target).second.at(i));
+        }
+      }
+      if(userList[j].getID() == count.at(target).second.at(i)){
+        removeUser(userList[j]);
+        printf("removed userid %d",count.at(target).second.at(i));
+        break;
+      }
+    }
+  }
+
+  //printf("\n");
   // Add data about the pinging distance in each group.
 }
 void Server::updateMatrix(int distance, City cityOne, City cityTwo){
