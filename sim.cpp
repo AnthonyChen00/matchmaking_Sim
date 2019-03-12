@@ -152,6 +152,6 @@ int main(){
   printf("Before\n");
   simulator_a.print_cities();
   printf("After\n");
-  simulator_a.simulate_loss();
+  //simulator_a.simulate_loss();
   simulator_a.print_cities();
 }

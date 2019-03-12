@@ -111,12 +111,9 @@ void Server::matchmake(){
   if(target!=0){
     printf("List of users: -");
     for(int i=0; i<count.at(target).second.size();i++){
-      if(i == count.at(target).second.size()-1)
-        printf(" %d",count.at(target).second.at(i));
-      else
-        printf(" %d,",count.at(target).second.at(i));
+      printf(" %d,",count.at(target).second.at(i));
     }
-    printf(" -\n");
+    printf(" %d -\n", count.at(target).first);
     for(int i=0; i<count.at(target).second.size();i++){
       //printf("%d",count.at(target).second.at(i));
       for(int j=0;j<userList.size();j++){
