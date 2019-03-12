@@ -153,5 +153,5 @@ int main(){
   Sim simulator_a;
   simulator_a.initialize_Simulator_A();
   // simulator_a.simulate_loss();
-  simulator_a.print_cities();
+  //simulator_a.print_cities();
 }
