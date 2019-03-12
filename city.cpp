@@ -51,3 +51,9 @@ void City::removeUser(User targetUser){
     }
   }
 }
+
+void City::printUsers(){
+  for (unsigned int i = 0; i < Users.size();i++){
+    printf("%d ",Users[i].getID());
+  }
+}

@@ -34,8 +34,8 @@ void Server::printCity(){
   }
 }
 void Server::printUsers(){
-  for(int i=0;i<userList.size();i++){
-    printf("User %d is in city %d", userList[i].getID(),userList[i].getCity());
+  for(unsigned int i=0;i<userList.size();i++){
+    printf("User %d is in city %d\n", userList[i].getID(),userList[i].getCity());
   }
 }
 void Server::init_city_adjMatrix(){
@@ -62,6 +62,7 @@ int Server::getDistance(int pingingUserCity, int targetUserCity){
 }
 void Server::addUser(User targetUser){
   userList.push_back(targetUser);
+  cityList[targetUser.getCity()].addUser(targetUser);
   int loc = userList.size()- 1;
   for(unsigned int i=0; i< userList.size();i++){
     commandUserPing(userList[i],userList[loc]);
@@ -74,8 +75,8 @@ void Server::addUser(User targetUser){
     matchmake();
 }
 void Server::matchmake(){
-  for(int i=0; i<userList.size();i++){
-    for(int j=0;j<userList[i].getWantedHosts().size();j++){
+  for(unsigned int i=0; i<userList.size();i++){
+    for(unsigned int j=0;j<userList[i].getWantedHosts().size();j++){
 
     }
   }
@@ -88,7 +89,7 @@ void Server::updateMatrix(int distance, City cityOne, City cityTwo){
 }
 
 void Server::updateUserWanted(int userID, std::vector<User> usersWanted){
-  for(int i=0; i<userList.size();i++){
+  for(unsigned int i=0; i<userList.size();i++){
     if(userList[i].getID() == userID){
       userList[i].setWantedHosts(usersWanted);
     }

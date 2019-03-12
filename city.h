@@ -24,6 +24,7 @@ class City{
     void addCity(int distance[]);
     void removeUser(User targetUser);
     void addUser(User targetUser);
+    void printUsers();
 
     void printAdjMatrix();
 

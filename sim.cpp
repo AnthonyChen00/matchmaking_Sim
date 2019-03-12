@@ -67,6 +67,7 @@ void Sim::initialize_Simulator_A(){
   //updating the distance matrix of all the cities
   server.init_city_adjMatrix();
 
+  printf("cities in server: %d\n",server.getCityList().size());
 
   std::cout << "PART D" << std::endl;
   //create users and adding them to list of users
@@ -76,28 +77,25 @@ void Sim::initialize_Simulator_A(){
     if(chooser == 0){
       User addedUser(i%NUMBEROFUSERS,1,&server,0);
       server.addUser(addedUser);
-      listOfCities[0].addUser(addedUser);
-      listOfUsers.push_back(addedUser);
+      // listOfUsers.push_back(addedUser);
     }
     else if(chooser == 1){
       User addedUser(i%NUMBEROFUSERS,1,&server,1);
       server.addUser(addedUser);
-      listOfCities[1].addUser(addedUser);
-      listOfUsers.push_back(addedUser);
+      // listOfUsers.push_back(addedUser);
   }
     else if(chooser == 2){
       User addedUser(i%NUMBEROFUSERS,1,&server,2);
       server.addUser(addedUser);
-      listOfCities[2].addUser(addedUser);
-      listOfUsers.push_back(addedUser);
+      // listOfUsers.push_back(addedUser);
     }
     else if(chooser == 3){
       User addedUser(i%NUMBEROFUSERS,1,&server,3);
       server.addUser(addedUser);
-      listOfCities[3].addUser(addedUser);
-      listOfUsers.push_back(addedUser);
+      // listOfUsers.push_back(addedUser);
     }
   }
+  std::cout << "PART E\n";
 }
 
 void Sim::add_city(City newCity){
@@ -108,9 +106,10 @@ void Sim::add_user(User newUser){
 }
 
 void Sim::print_cities(){
-  for(int i=0; i<server.getCityList().size();i++){
-    printf("City %d with these users: \n", server.getCityList().at(i).getCityNo());
-    print_Uservector(server.getCityList().at(i).getUsers());
+  for(unsigned int i=0; i<server.getCityList().size();i++){
+    printf("City %d:", server.getCityList().at(i).getCityNo());
+    server.getCityList().at(i).printUsers();
+    // print_Uservector(server.getCityList().at(i).getUsers());
     std::cout << std::endl;
   }
 }
@@ -144,14 +143,15 @@ void Sim::print_adjMatrix(){
 void Sim::simulate_loss(){
   printf("Simulating removing user from all objects...\n");
   printf("Removing user %d, from city %d\n",listOfUsers[1].getID(), listOfUsers[1].getCity());
-  server.removeUser(listOfUsers[1]);
-
-
+  // server.removeUser(listOfUsers[1]);
 }
 
 int main(){
   Sim simulator_a;
   simulator_a.initialize_Simulator_A();
-  // simulator_a.simulate_loss();
-  //simulator_a.print_cities();
+  printf("Before\n");
+  simulator_a.print_cities();
+  printf("After\n");
+  simulator_a.simulate_loss();
+  simulator_a.print_cities();
 }
