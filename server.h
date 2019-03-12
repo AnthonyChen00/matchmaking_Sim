@@ -3,6 +3,7 @@
 #define SERVER_H
 
 #include "user.h"
+#include <map>
 #include <vector>
 
 class City;
