@@ -3,7 +3,7 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
-#define NUMBEROFUSERS 30
+#define NUMBEROFUSERS 300
 /* Simulator consisting of 3 cities (1,2,3) and 3 edges.
                   a
               3->/ \ <- 5
@@ -150,8 +150,11 @@ int main(){
   Sim simulator_a;
   simulator_a.initialize_Simulator_A();
   printf("Before\n");
+  auto t1 = std::chrono::high_resolution_clock::now();
   simulator_a.print_cities();
   printf("After\n");
+  auto t2 = std::chrono::high_resolution_clock::now();
+  std::cout << "Simulator A took " << std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count() << std::endl;
   //simulator_a.simulate_loss();
   simulator_a.print_cities();
 }
