@@ -49,6 +49,9 @@ void City::removeUser(User targetUser){
       Users.erase(Users.begin()+i);
       break;
     }
+    else{
+      Users[i].removeUser(targetUser);
+    }
   }
 }
 

@@ -142,8 +142,8 @@ void Sim::print_adjMatrix(){
 
 void Sim::simulate_loss(){
   printf("Simulating removing user from all objects...\n");
-  printf("Removing user %d, from city %d\n",listOfUsers[1].getID(), listOfUsers[1].getCity());
-  // server.removeUser(listOfUsers[1]);
+  printf("Removing user %d, from city %d\n",server.getUserList().at(1).getID(), server.getUserList().at(1).getCity());
+  server.removeUser(server.getUserList().at(1));
 }
 
 int main(){

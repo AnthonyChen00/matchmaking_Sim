@@ -44,6 +44,7 @@ void User::removeUser(User targetUser){
   for (unsigned int i = 0; i < wantedHosts.size(); i++){
     if (wantedHosts[i].getID() == targetUser.getID()){
       wantedHosts.erase(wantedHosts.begin() + i);
+      break;
     }
   }
 }
