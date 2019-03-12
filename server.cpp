@@ -75,11 +75,37 @@ void Server::addUser(User targetUser){
     matchmake();
 }
 void Server::matchmake(){
-  for(unsigned int i=0; i<userList.size();i++){
-    for(unsigned int j=0;j<userList[i].getWantedHosts().size();j++){
-
+  std::vector< std::pair<int,int> >count;
+  int target =0;
+  int found = 0;
+  for(int i=0; i<userList.size(); i++){
+    for(int j=0; j<userList[i].getWantedHosts().size(); j++){
+      found = 0;
+      for(int k=0; k<count.size(); k++){
+        if(count.at(k).first == userList[i].getWantedHosts().at(j).getID()){
+          found = 1;
+          count.at(k).second = count.at(k).second + 1;
+          if(count.at(k).second >= 4){
+            target = count.at(k).first;
+            printf("USER %d HAS BROKEN FORMATION", count.at(k).first);
+            break;
+          }
+          break;
+        }
+      }
+      if(found == 0){
+        count.push_back(std::pair<int,int>(userList[i].getWantedHosts().at(j).getID(),1));
+      }
+      if(target!= 0){
+        break;
+      }
+    }
+    if(target!=0){
+      break;
     }
   }
+
+  // Add data about the pinging distance in each group.
 }
 void Server::updateMatrix(int distance, City cityOne, City cityTwo){
   int cityOneId = cityOne.getCityNo();
