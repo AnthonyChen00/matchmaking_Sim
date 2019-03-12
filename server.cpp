@@ -87,7 +87,8 @@ void Server::matchmake(){
           count.at(k).second.push_back(userList[i].getID());
           if(count.at(k).second.size() >= 4){
             target = k;
-            printf("USER %d HAS BROKEN FORMATION", count.at(k).first);
+            // printf("USER %d HAS BROKEN FORMATION", count.at(k).first);
+            // printf("\n");
             break;
           }
           break;
@@ -107,25 +108,34 @@ void Server::matchmake(){
     }
   }
 
-  //printf("These users: ");
-  for(int i=0; i<count.at(target).second.size();i++){
-    //printf("%d",count.at(target).second.at(i));
-    for(int j=0;j<userList.size();j++){
-      if(i==0){
-        if(userList[j].getID() == count.at(target).first){
+  if(target!=0){
+    printf("List of users: -");
+    for(int i=0; i<count.at(target).second.size();i++){
+      if(i == count.at(target).second.size()-1)
+        printf(" %d",count.at(target).second.at(i));
+      else
+        printf(" %d,",count.at(target).second.at(i));
+    }
+    printf(" -\n");
+    for(int i=0; i<count.at(target).second.size();i++){
+      //printf("%d",count.at(target).second.at(i));
+      for(int j=0;j<userList.size();j++){
+        if(userList[j].getID() == count.at(target).second.at(i)){
           removeUser(userList[j]);
-          printf("in special case");
-          printf("removed userid %d",count.at(target).second.at(i));
+          // printf("removed userid %d",count.at(target).second.at(i));
+          break;
         }
       }
-      if(userList[j].getID() == count.at(target).second.at(i)){
-        removeUser(userList[j]);
-        printf("removed userid %d",count.at(target).second.at(i));
-        break;
+    }
+    for(int j=0;j<userList.size();j++){
+      if(userList[j].getID() == count.at(target).first){
+          removeUser(userList[j]);
+          // printf("in special case");
+          // printf("removed userid %d",count.at(target).first);
       }
     }
+    // printf("\n");
   }
-
   //printf("\n");
   // Add data about the pinging distance in each group.
 }
