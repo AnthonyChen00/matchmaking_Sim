@@ -30,7 +30,7 @@ int User::ping(User target){
   if(target.getID() == userID){
     return 0;
   }
-  int distance = server->getDistance(getCity(),target.getCity());
+  int distance = server->getDistance(cityID,target.getCity());
   return distance/bandwidth;
 }
 

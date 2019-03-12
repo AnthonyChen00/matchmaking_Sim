@@ -28,7 +28,6 @@ void Server::init_city_adjMatrix(){
   }
 }
 void Server::removeUser(User targetUser){
-
   for (unsigned int i = 0; i < userList.size(); i++){
     if (targetUser.getID() == userList[i].getID()){
 
