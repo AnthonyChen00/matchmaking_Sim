@@ -20,18 +20,24 @@ User::~User(){
 void User::pingAll(std::vector<User> users){
   // int desired_ping = 100 //to bypass error, need to implenment
   for(unsigned int i=0; i<users.size(); i++){
-    // if (ping(users[i]) < desired_ping){
-    //   addWantedHosts(users[i]);
-    // }
+    ping(users[i]);
   }
-  send();
+}
+
+void User::setWantedHosts(std::vector<User> usersWanted){
+  wantedHosts = usersWanted;
 }
 int User::ping(User target){
   if(target.getID() == userID){
     return 0;
   }
-  int distance = server->getDistance(cityID,target.getCity());
-  return distance/bandwidth;
+  int distance = server->getDistance(getCity(),target.getCity());
+  printf("The distance: %d and the bandwidth: %d and the DESIRED_PING is %d \n", distance,bandwidth,DESIRED_PING);
+  if(distance/bandwidth < DESIRED_PING){
+    printf("added \n");
+    addWantedHosts(target);
+  }
+  return 1;
 }
 
 void User::removeUser(User targetUser){
@@ -44,6 +50,9 @@ void User::removeUser(User targetUser){
 
 void User::addWantedHosts(User wantedHost){
   wantedHosts.push_back(wantedHost);
+  for(int i=0; i<wantedHosts.size(); i++){
+    printf("%d is this host %d", i,wantedHosts[i].getID());
+  }
   send();
 }
 

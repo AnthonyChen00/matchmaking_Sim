@@ -65,10 +65,8 @@ void Sim::initialize_Simulator_A(){
   std::cout << "PART C" << std::endl;
   //updating the distance matrix of all the cities
   server.init_city_adjMatrix();
-  server.getCityList().at(0).printAdjMatrix();
-  server.getCityList().at(1).printAdjMatrix();
-  server.getCityList().at(2).printAdjMatrix();
-  server.getCityList().at(3).printAdjMatrix();
+  server.printCity();
+
 
   std::cout << "PART D" << std::endl;
   //create users and adding them to list of users
@@ -76,33 +74,38 @@ void Sim::initialize_Simulator_A(){
     int chooser;
     chooser = i%4; // 4 for the amount of cities.
     if(chooser == 0){
-      User addedUser(i%NUMBEROFUSERS,10,&server,0);
+      User addedUser(i%NUMBEROFUSERS,1,&server,0);
       server.addUser(addedUser);
       listOfCities[0].addUser(addedUser);
       listOfUsers.push_back(addedUser);
     }
     else if(chooser == 1){
-      User addedUser(i%NUMBEROFUSERS,10,&server,1);
+      User addedUser(i%NUMBEROFUSERS,1,&server,1);
       server.addUser(addedUser);
       listOfCities[1].addUser(addedUser);
       listOfUsers.push_back(addedUser);
   }
     else if(chooser == 2){
-      User addedUser(i%NUMBEROFUSERS,10,&server,2);
+      User addedUser(i%NUMBEROFUSERS,1,&server,2);
       server.addUser(addedUser);
       listOfCities[2].addUser(addedUser);
       listOfUsers.push_back(addedUser);
     }
     else if(chooser == 3){
-      User addedUser(i%NUMBEROFUSERS,10,&server,3);
+      User addedUser(i%NUMBEROFUSERS,1,&server,3);
       server.addUser(addedUser);
       listOfCities[3].addUser(addedUser);
       listOfUsers.push_back(addedUser);
     }
   }
-
-
-
+  server.printUsers();
+  for(int i=0; i<server.getUserList().size();i++){
+    printf("UserID %d with these desired hosts:", server.getUserList().at(i).getID());
+    for(int j=0; j<server.getUserList().at(i).getWantedHosts().size();j++){
+      printf("%d ", server.getUserList().at(i).getWantedHosts().at(j).getID());
+    }
+    printf("\n");
+  }
 }
 
 void Sim::add_city(City newCity){
@@ -112,10 +115,10 @@ void Sim::add_user(User newUser){
   listOfUsers.push_back(newUser);
 }
 
-void Sim::print_cities(){
-  for(unsigned int i=0; i<listOfCities.size();i++){
-    std::printf("City %d with these users: \n", listOfCities[i].getCityNo());
-    print_Uservector(listOfCities[i].getUsers());
+void Sim::print_cities(Server server){
+  for(int i=0; i<server.getCityList().size();i++){
+    std::printf("City %d with these users: \n", server.getCityList().at(i).getCityNo());
+    print_Uservector(server.getCityList().at(i).getUsers());
     std::cout << std::endl;
   }
 }
@@ -157,6 +160,6 @@ void Sim::simulate_loss(){
 int main(){
   Sim simulator_a;
   simulator_a.initialize_Simulator_A();
-  simulator_a.simulate_loss();
+  // simulator_a.simulate_loss();
   simulator_a.print_cities();
 }
