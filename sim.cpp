@@ -173,11 +173,15 @@ double Sim::averagePing(){
   std::string line;
   int count = 0;
   double sum = 0;
+  double temp = 0;
   inputFile.open("groups_of_users.txt");
+  outputFile.open("pingValues.csv");
   if (inputFile.is_open()){
     while(getline(inputFile, line)){
-      sum += calculate_ping(line);
+      temp = calculate_ping(line);
       count++;
+      sum+= temp;
+      outputFile << std::to_string(temp) + ","<< std::endl;
     }
     inputFile.close();
   }
@@ -206,5 +210,5 @@ double Sim::calculate_ping(std::string input){
 int main(){
   Sim simulator_a;
   simulator_a.initialize_Simulator_A();
-  printf("Average ping of: %f\n",simulator_a.averagePing());
+  printf("Average ping of: %fs\n",simulator_a.averagePing());
 }
