@@ -73,13 +73,13 @@ void Sim::initialize_Simulator_A(){
   std::cout << "PART D" << std::endl;
   //create users and adding them to list of users
   auto t1 = std::chrono::high_resolution_clock::now();
-
+  std::srand((unsigned)time(0));
   for(unsigned int i=0; i<NUMBEROFUSERS; i++){
     std::vector<int> newGroup;
     int chooser;
-    chooser = rand()%4; // 4 for the amount of cities.
+    chooser = std::rand()%4; // 4 for the amount of cities.
     if(chooser == 0){
-      User addedUser(i%NUMBEROFUSERS,1,&server,0);
+      User addedUser(i%NUMBEROFUSERS,std::rand()%3,&server,0);
       newGroup = server.addUser(addedUser);
       if(newGroup.size() > 0){
       for (auto i = newGroup.begin(); i != newGroup.end(); i++){
@@ -90,7 +90,7 @@ void Sim::initialize_Simulator_A(){
       listOfUsers.push_back(addedUser);
     }
     else if(chooser == 1){
-      User addedUser(i%NUMBEROFUSERS,1,&server,1);
+      User addedUser(i%NUMBEROFUSERS,std::rand()%3,&server,1);
       newGroup = server.addUser(addedUser);
       if(newGroup.size() > 0){
         for (auto i = newGroup.begin(); i != newGroup.end(); i++){
@@ -101,7 +101,7 @@ void Sim::initialize_Simulator_A(){
       listOfUsers.push_back(addedUser);
   }
     else if(chooser == 2){
-      User addedUser(i%NUMBEROFUSERS,1,&server,2);
+      User addedUser(i%NUMBEROFUSERS,std::rand()%3,&server,2);
       newGroup = server.addUser(addedUser);
       if(newGroup.size() > 0){
         for (auto i = newGroup.begin(); i != newGroup.end(); i++){
@@ -112,7 +112,7 @@ void Sim::initialize_Simulator_A(){
       listOfUsers.push_back(addedUser);
     }
     else if(chooser == 3){
-      User addedUser(i%NUMBEROFUSERS,1,&server,3);
+      User addedUser(i%NUMBEROFUSERS,std::rand()%3,&server,3);
       newGroup = server.addUser(addedUser);
       if(newGroup.size() > 0){
         for (auto i = newGroup.begin(); i != newGroup.end(); i++){

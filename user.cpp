@@ -27,17 +27,17 @@ void User::pingAll(std::vector<User> users){
 void User::setWantedHosts(std::vector<User> usersWanted){
   wantedHosts = usersWanted;
 }
-int User::ping(User target){
+double User::ping(User target){
   if(target.getID() == userID){
     return 0;
   }
   int distance = server->getDistance(getCity(),target.getCity());
   // printf("The distance: %d and the bandwidth: %d and the DESIRED_PING is %d \n", distance,bandwidth,DESIRED_PING);
-  if(distance/bandwidth < DESIRED_PING){
+  if(distance*1.0/bandwidth < DESIRED_PING){
     // printf("added \n");
     addWantedHosts(target);
+    return (distance*1.0/bandwidth);
   }
-  return 1;
 }
 
 void User::removeUser(User targetUser){

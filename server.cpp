@@ -84,6 +84,7 @@ std::vector<int> Server::matchmake(){
   std::vector<int> final_group;
   int target =0;
   int found = 0;
+  //printf("In matchmaking \n");
   for(unsigned int i=0; i<userList.size(); i++){
     for(unsigned int j=0; j<userList[i].getWantedHosts().size(); j++){
       found = 0;
@@ -112,6 +113,7 @@ std::vector<int> Server::matchmake(){
     }
   }
   if(target!=0){
+    //printf("Found target \n");
     final_group.push_back(count.at(target).first);
     for(unsigned int i=0; i<count.at(target).second.size();i++){
       //printf("%d",count.at(target).second.at(i));

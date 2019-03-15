@@ -32,7 +32,7 @@ class User{
 
     // Member Functions
     void removeUser(User targetUser);
-    int ping(User target);
+    double ping(User target);
     void pingAll(std::vector<User> users);
     void send();
 
