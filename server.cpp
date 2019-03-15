@@ -73,10 +73,10 @@ std::vector<int> Server::addUser(User targetUser){
   for(unsigned int i=0; i< userList.size();i++){
     commandUserPing(userList[loc],userList[i]);
   }
-  // if(userList.size() > 5)
-  //   return (matchmake());
-  if(userList.size() > 10)
-    return matchmakeRandom();
+  if(userList.size() > 5)
+    return (matchmake());
+  // if(userList.size() > 10)
+  //   return matchmakeRandom();
   else{
     return zero;
   }
@@ -101,7 +101,7 @@ std::vector<int> Server::matchmake(){
     for(unsigned int j=0; j<userList[i].getWantedHosts().size(); j++){
       found = 0;
       for(unsigned int k=0; k<count.size(); k++){
-        if(count.at(k).first == userList[i].getWantedHosts().at(j).getID()){
+        if(count.at(k).first == userList[i].getWantedHosts().at(j)){
           found = 1;
           count.at(k).second.push_back(userList[i].getID());
           if(count.at(k).second.size() >= 4){
@@ -114,7 +114,7 @@ std::vector<int> Server::matchmake(){
       if(found == 0){
         std::vector<int> tempVector;
         tempVector.push_back(userList[i].getID());
-        count.push_back(std::pair<int, std::vector<int>>(userList[i].getWantedHosts().at(j).getID(),tempVector));
+        count.push_back(std::pair<int, std::vector<int>>(userList[i].getWantedHosts().at(j),tempVector));
       }
       if(target!= 0){
         break;
@@ -155,7 +155,7 @@ void Server::updateMatrix(int distance, City cityOne, City cityTwo){
   adjMatrix[cityTwoId][cityOneId] = distance;
 }
 
-void Server::updateUserWanted(int userID, std::vector<User> usersWanted){
+void Server::updateUserWanted(int userID, std::vector<int> usersWanted){
   for(unsigned int i=0; i<userList.size();i++){
     if(userList[i].getID() == userID){
       userList[i].setWantedHosts(usersWanted);

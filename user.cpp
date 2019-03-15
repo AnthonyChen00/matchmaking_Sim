@@ -24,9 +24,6 @@ void User::pingAll(std::vector<User> users){
   }
 }
 
-void User::setWantedHosts(std::vector<User> usersWanted){
-  wantedHosts = usersWanted;
-}
 double User::ping(User target){
   if(target.getID() == userID){
     return 0;
@@ -42,7 +39,7 @@ double User::ping(User target){
 
 void User::removeUser(User targetUser){
   for (unsigned int i = 0; i < wantedHosts.size(); i++){
-    if (wantedHosts[i].getID() == targetUser.getID()){
+    if (wantedHosts[i] == targetUser.getID()){
       wantedHosts.erase(wantedHosts.begin() + i);
       break;
     }
@@ -50,10 +47,13 @@ void User::removeUser(User targetUser){
 }
 
 void User::addWantedHosts(User wantedHost){
-  wantedHosts.push_back(wantedHost);
+  wantedHosts.push_back(wantedHost.getID());
   send();
 }
 
+void User::setWantedHosts(std::vector<int> userWanted){
+  wantedHosts =  userWanted;
+}
 // Use whenever wantedHosts is changed, so when hosts are added and when hosts are removed
 void User::send(){
   server->updateUserWanted(userID, wantedHosts);

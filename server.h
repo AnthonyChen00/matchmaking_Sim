@@ -29,7 +29,7 @@ class Server{
     void removeUser(User targetUser);
     int getDistance(int pingingUserCity, int targetUserCity);
     void updateMatrix(int distance, City cityOne, City cityTwo); //updating the adjacent matrix
-    void updateUserWanted(int userID, std::vector<User> usersWanted);
+    void updateUserWanted(int userID, std::vector<int> usersWanted);
     std::vector<int> matchmake();
     std::vector<int> matchmakeRandom();
     void commandUserPing(User pingingUser);

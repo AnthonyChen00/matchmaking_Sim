@@ -26,9 +26,9 @@ class User{
     void setBandWidth(int new_bandwidth){bandwidth = new_bandwidth;}
     Server* getServer(){return server;}
     int getCity(){return cityID;}
-    void setWantedHosts(std::vector<User> usersWanted);
-    std::vector<User> getWantedHosts(){return wantedHosts;}
+    std::vector<int> getWantedHosts(){return wantedHosts;}
     void addWantedHosts(User wantedHost);
+    void setWantedHosts(std::vector<int> userWanted);
 
     // Member Functions
     void removeUser(User targetUser);
@@ -40,7 +40,7 @@ class User{
     int userID;
     int bandwidth;
     int cityID;
-    std::vector<User> wantedHosts;
+    std::vector<int> wantedHosts;
     Server* server;
 };
 
