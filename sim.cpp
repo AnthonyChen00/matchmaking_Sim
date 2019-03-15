@@ -79,7 +79,7 @@ void Sim::initialize_Simulator_A(){
     int chooser;
     chooser = std::rand()%4; // 4 for the amount of cities.
     if(chooser == 0){
-      User addedUser(i%NUMBEROFUSERS,std::rand()%3,&server,0);
+      User addedUser(i%NUMBEROFUSERS,std::rand()%3+1,&server,0);
       newGroup = server.addUser(addedUser);
       if(newGroup.size() > 0){
       for (auto i = newGroup.begin(); i != newGroup.end(); i++){
@@ -90,7 +90,7 @@ void Sim::initialize_Simulator_A(){
       listOfUsers.push_back(addedUser);
     }
     else if(chooser == 1){
-      User addedUser(i%NUMBEROFUSERS,std::rand()%3,&server,1);
+      User addedUser(i%NUMBEROFUSERS,std::rand()%3+1,&server,1);
       newGroup = server.addUser(addedUser);
       if(newGroup.size() > 0){
         for (auto i = newGroup.begin(); i != newGroup.end(); i++){
@@ -101,7 +101,7 @@ void Sim::initialize_Simulator_A(){
       listOfUsers.push_back(addedUser);
   }
     else if(chooser == 2){
-      User addedUser(i%NUMBEROFUSERS,std::rand()%3,&server,2);
+      User addedUser(i%NUMBEROFUSERS,std::rand()%3+1,&server,2);
       newGroup = server.addUser(addedUser);
       if(newGroup.size() > 0){
         for (auto i = newGroup.begin(); i != newGroup.end(); i++){
@@ -112,7 +112,7 @@ void Sim::initialize_Simulator_A(){
       listOfUsers.push_back(addedUser);
     }
     else if(chooser == 3){
-      User addedUser(i%NUMBEROFUSERS,std::rand()%3,&server,3);
+      User addedUser(i%NUMBEROFUSERS,std::rand()%3+1,&server,3);
       newGroup = server.addUser(addedUser);
       if(newGroup.size() > 0){
         for (auto i = newGroup.begin(); i != newGroup.end(); i++){
@@ -169,7 +169,7 @@ void Sim::print_adjMatrix(){
 }
 
 
-int Sim::averagePing(){
+double Sim::averagePing(){
   std::string line;
   int count = 0;
   double sum = 0;
@@ -184,7 +184,7 @@ int Sim::averagePing(){
   return sum/count;
 }
 
-int Sim::calculate_ping(std::string input){
+double Sim::calculate_ping(std::string input){
   int temp= 0;
   std::vector<int> users;
   double sum = 0;
@@ -198,7 +198,7 @@ int Sim::calculate_ping(std::string input){
     }
   }
   for (unsigned int i = 1; i < users.size();i++){
-    sum += listOfUsers[0].ping(listOfUsers[i]);
+    sum += listOfUsers[users[0]].ping(listOfUsers[users[i]]);
   }
   return sum/4;
 }
@@ -206,5 +206,5 @@ int Sim::calculate_ping(std::string input){
 int main(){
   Sim simulator_a;
   simulator_a.initialize_Simulator_A();
-  printf("Average ping of: %d\n",simulator_a.averagePing());
+  printf("Average ping of: %f\n",simulator_a.averagePing());
 }
