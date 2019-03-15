@@ -3,7 +3,7 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
-#define NUMBEROFUSERS 300
+#define NUMBEROFUSERS 3000
 /* Simulator consisting of 3 cities (1,2,3) and 3 edges.
                   a
               3->/ \ <- 5
@@ -71,6 +71,8 @@ void Sim::initialize_Simulator_A(){
 
   std::cout << "PART D" << std::endl;
   //create users and adding them to list of users
+  auto t1 = std::chrono::high_resolution_clock::now();
+
   for(unsigned int i=0; i<NUMBEROFUSERS; i++){
     int chooser;
     chooser = i%4; // 4 for the amount of cities.
@@ -95,6 +97,8 @@ void Sim::initialize_Simulator_A(){
       // listOfUsers.push_back(addedUser);
     }
   }
+  auto t2 = std::chrono::high_resolution_clock::now();
+  std::cout << "Simulator A took " << std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count() << "ms to matchmake\n";
   std::cout << "PART E\n";
 }
 
@@ -150,11 +154,7 @@ int main(){
   Sim simulator_a;
   simulator_a.initialize_Simulator_A();
   printf("Before\n");
-  auto t1 = std::chrono::high_resolution_clock::now();
   simulator_a.print_cities();
   printf("After\n");
-  auto t2 = std::chrono::high_resolution_clock::now();
-  std::cout << "Simulator A took " << std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count() << std::endl;
-  //simulator_a.simulate_loss();
   simulator_a.print_cities();
 }
