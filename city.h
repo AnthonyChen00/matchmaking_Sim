@@ -14,6 +14,7 @@ class City{
     ~City();
 
     int getCityNo(){return cityNo;}
+    int setPercent(int newPercent){percent = newPercent};
     void setCityNo(int newCityNo){cityNo = newCityNo;} // update/assign the current City ID
 
     std::vector<User> getUsers(){return Users;}
@@ -32,6 +33,7 @@ class City{
     std::vector<User> Users;
     std::vector< std::vector<int> > adjMatrix; // [a]: should be shared among all the cities, should the simulator update/maintain the matrix completely?
     int cityNo;
+    int percent;
 };
 
 #endif

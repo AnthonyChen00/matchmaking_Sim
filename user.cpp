@@ -52,7 +52,7 @@ void User::addWantedHosts(User wantedHost){
 }
 
 void User::setWantedHosts(std::vector<int> userWanted){
-  wantedHosts =  userWanted;
+  wantedHosts = userWanted;
 }
 // Use whenever wantedHosts is changed, so when hosts are added and when hosts are removed
 void User::send(){

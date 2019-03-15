@@ -32,6 +32,7 @@ class Server{
     void updateUserWanted(int userID, std::vector<int> usersWanted);
     std::vector<int> matchmake();
     std::vector<int> matchmakeRandom();
+    std::vector<int> geolocation();
     void commandUserPing(User pingingUser);
     void commandUserPing(User pingingUser, User pingedUser);
   private:
@@ -39,6 +40,7 @@ class Server{
     std::vector< std::vector<User> > userGroups;
     std::vector< City > cityList;
     std::vector< User > userList;
+    std::vector< std::pair< int,int> > waitingHosts;
 };
 
 #endif

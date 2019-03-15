@@ -91,6 +91,72 @@ std::vector<int> Server::matchmakeRandom(){
   }
   return final_group;
 }
+
+std::vector<int> Server::geolocation(){
+  std::vector< std::pair<int, std::vector<int> > >count;
+  std::vector<int> final_group;
+  std::vector<int> target;
+  int found = 0;
+  //printf("In matchmaking \n");
+  for(unsigned int i=0; i<userList.size(); i++){
+    for(unsigned int j=0; j<userList[i].getWantedHosts().size(); j++){
+      found = 0;
+      for(unsigned int k=0; k<count.size(); k++){
+        if(count.at(k).first == userList[i].getWantedHosts().at(j)){
+          found = 1;
+          count.at(k).second.push_back(userList[i].getID());
+          if(count.at(k).second.size() >= 4){
+            target.push_back(k);
+            break;
+          }
+          break;
+        }
+      }
+      if(found == 0){
+        std::vector<int> tempVector;
+        tempVector.push_back(userList[i].getID());
+        count.push_back(std::pair<int, std::vector<int>>(userList[i].getWantedHosts().at(j),tempVector));
+      }
+    }
+  }
+  if(target.size()!=0){
+    int temp[target.size()];
+    int desiredHost = 0;
+    int targetCity;
+    for (unsigned int i = 0 ; i < target.size();i++){
+      for(unsigned int m =0; m<userList.size();m++){
+        if(userList[m].getID() == count.at(target[m]).first){
+          targetCity = userList[m].getCity();
+        }
+      }
+      for (unsigned int j = 0; j < cityList[targetCity].getUsers().size();j++){
+        for (unsigned int k = 0; k < count.at(target[i]).second.size();k++){
+            if (count.at(target[i]).second.at(k) == cityList[targetCity].getUsers().at(j)){
+              temp[i]++;
+            }
+            if (temp[i] > 3){
+              desiredHost = i;
+              break;
+            }
+        }
+        if (temp[i] > 3){
+          break;
+        }
+      }
+      if (temp[i] > 3){
+        break;
+      }
+    }
+    if (desiredHost == 0){
+      //do geolocation stuff
+    }
+    else{
+      //make final_group
+    }
+  }
+  return (final_group);
+}
+
 std::vector<int> Server::matchmake(){
   std::vector< std::pair<int, std::vector<int> > >count;
   std::vector<int> final_group;

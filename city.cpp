@@ -2,6 +2,7 @@
 
 City::City(){
   cityNo = 0;
+  percent = 0;
 }
 
 City::~City(){

@@ -34,15 +34,19 @@ void Sim::initialize_Simulator_A(){
   outputFile.open("groups_of_users.txt");
   City a;
   a.setCityNo(0);
+  a.setPercent(50);
   add_city(a);
   City b;
   b.setCityNo(1);
+  b.setPercent(20)
   add_city(b);
   City c;
   c.setCityNo(2);
+  c.setPercent(20);
   add_city(c);
   City d;
   d.setCityNo(3);
+  d.setPercent(10);
   add_city(d);
 
   std::cout << "PART A" << std::endl;
@@ -211,4 +215,5 @@ int main(){
   Sim simulator_a;
   simulator_a.initialize_Simulator_A();
   printf("Average ping of: %fs\n",simulator_a.averagePing());
+
 }
