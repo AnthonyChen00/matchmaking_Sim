@@ -23,7 +23,7 @@ class Sim{
     void print_users();
     void print_Uservector(std::vector<User> printing);
     void print_adjMatrix();
-    void averagePing();
+    int averagePing();
     int calculate_ping(std::string input);
 
   private:

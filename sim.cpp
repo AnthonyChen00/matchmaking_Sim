@@ -77,7 +77,7 @@ void Sim::initialize_Simulator_A(){
   for(unsigned int i=0; i<NUMBEROFUSERS; i++){
     std::vector<int> newGroup;
     int chooser;
-    chooser = i%4; // 4 for the amount of cities.
+    chooser = rand()%4; // 4 for the amount of cities.
     if(chooser == 0){
       User addedUser(i%NUMBEROFUSERS,1,&server,0);
       newGroup = server.addUser(addedUser);
@@ -123,6 +123,7 @@ void Sim::initialize_Simulator_A(){
       listOfUsers.push_back(addedUser);
     }
   }
+  outputFile.close();
   auto t2 = std::chrono::high_resolution_clock::now();
   std::cout << "Simulator A took " << std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count() << "ms to matchmake\n";
   std::cout << "PART E\n";
@@ -154,9 +155,6 @@ void Sim::print_users(){
 void Sim::print_Uservector(std::vector<User> printing){
   for(unsigned int i=0; i<printing.size();i++){
     printf("UserID %d with these desired hosts:", printing[i].getID());
-    // for(unsigned int j=0; j<printing[i].getWantedHosts().size();j++){
-    //   std::printf("%d ", printing[i].getWantedHosts().at(j).getID());
-    // }
     std::cout << std::endl;
   }
 }
@@ -171,11 +169,10 @@ void Sim::print_adjMatrix(){
 }
 
 
-
-void Sim::averagePing(){
+int Sim::averagePing(){
   std::string line;
   int count = 0;
-  int sum = 0;
+  double sum = 0;
   inputFile.open("groups_of_users.txt");
   if (inputFile.is_open()){
     while(getline(inputFile, line)){
@@ -190,6 +187,7 @@ void Sim::averagePing(){
 int Sim::calculate_ping(std::string input){
   int temp= 0;
   std::vector<int> users;
+  double sum = 0;
   for (unsigned int i = 0; i < input.size();i++){
     if(input[i] == ' '){
       users.push_back(temp);
@@ -200,12 +198,13 @@ int Sim::calculate_ping(std::string input){
     }
   }
   for (unsigned int i = 1; i < users.size();i++){
-    server.commandUserPing(users.at(1).getID(),users.at(i).getID());
+    sum += listOfUsers[0].ping(listOfUsers[i]);
   }
+  return sum/4;
 }
 
 int main(){
   Sim simulator_a;
   simulator_a.initialize_Simulator_A();
-  simulator_a.averagePing();
+  printf("Average ping of: %d\n",simulator_a.averagePing());
 }
