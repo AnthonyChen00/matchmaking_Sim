@@ -31,6 +31,7 @@ class Server{
     void updateMatrix(int distance, City cityOne, City cityTwo); //updating the adjacent matrix
     void updateUserWanted(int userID, std::vector<User> usersWanted);
     std::vector<int> matchmake();
+    std::vector<int> matchmakeRandom();
     void commandUserPing(User pingingUser);
     void commandUserPing(User pingingUser, User pingedUser);
   private:
