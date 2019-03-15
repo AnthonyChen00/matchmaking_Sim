@@ -25,12 +25,12 @@ class Server{
     void init_cities(std::vector<City> cities);
     void printCity();
     void printUsers();
-    void addUser(User targetUser);
+    std::vector<int> addUser(User targetUser);
     void removeUser(User targetUser);
     int getDistance(int pingingUserCity, int targetUserCity);
     void updateMatrix(int distance, City cityOne, City cityTwo); //updating the adjacent matrix
     void updateUserWanted(int userID, std::vector<User> usersWanted);
-    void matchmake();
+    std::vector<int> matchmake();
     void commandUserPing(User pingingUser);
     void commandUserPing(User pingingUser, User pingedUser);
   private:

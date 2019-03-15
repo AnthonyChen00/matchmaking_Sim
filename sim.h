@@ -5,6 +5,9 @@
 #include "server.h"
 #include <vector>
 #include <chrono>
+#include <fstream>
+#include <string>
+
 class User;
 class Server;
 class City;
@@ -20,14 +23,16 @@ class Sim{
     void print_users();
     void print_Uservector(std::vector<User> printing);
     void print_adjMatrix();
-    void simulate_loss();
+    void averagePing();
+    int calculate_ping(std::string input);
 
   private:
     Server server;
     std::vector<City> listOfCities;
     std::vector<User> listOfUsers;
     std::vector< std::vector<int> > adjMatrix;
-
+    std::ofstream outputFile;
+    std::ifstream inputFile;
   };
 
 #endif

@@ -3,7 +3,7 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
-#define NUMBEROFUSERS 3000
+#define NUMBEROFUSERS 300
 /* Simulator consisting of 3 cities (1,2,3) and 3 edges.
                   a
               3->/ \ <- 5
@@ -31,6 +31,7 @@ Sim::~Sim(){
 }
 void Sim::initialize_Simulator_A(){
   //Initialize listOfCities
+  outputFile.open("groups_of_users.txt");
   City a;
   a.setCityNo(0);
   add_city(a);
@@ -67,34 +68,59 @@ void Sim::initialize_Simulator_A(){
   //updating the distance matrix of all the cities
   server.init_city_adjMatrix();
 
-  printf("cities in server: %d\n",server.getCityList().size());
+  // printf("cities in server: %d\n",server.getCityList().size());
 
   std::cout << "PART D" << std::endl;
   //create users and adding them to list of users
   auto t1 = std::chrono::high_resolution_clock::now();
 
   for(unsigned int i=0; i<NUMBEROFUSERS; i++){
+    std::vector<int> newGroup;
     int chooser;
     chooser = i%4; // 4 for the amount of cities.
     if(chooser == 0){
       User addedUser(i%NUMBEROFUSERS,1,&server,0);
-      server.addUser(addedUser);
-      // listOfUsers.push_back(addedUser);
+      newGroup = server.addUser(addedUser);
+      if(newGroup.size() > 0){
+      for (auto i = newGroup.begin(); i != newGroup.end(); i++){
+          outputFile << *i << " ";
+        }
+        outputFile << std::endl;
+      }
+      listOfUsers.push_back(addedUser);
     }
     else if(chooser == 1){
       User addedUser(i%NUMBEROFUSERS,1,&server,1);
-      server.addUser(addedUser);
-      // listOfUsers.push_back(addedUser);
+      newGroup = server.addUser(addedUser);
+      if(newGroup.size() > 0){
+        for (auto i = newGroup.begin(); i != newGroup.end(); i++){
+            outputFile << *i << " ";
+        }
+        outputFile << std::endl;
+      }
+      listOfUsers.push_back(addedUser);
   }
     else if(chooser == 2){
       User addedUser(i%NUMBEROFUSERS,1,&server,2);
-      server.addUser(addedUser);
-      // listOfUsers.push_back(addedUser);
+      newGroup = server.addUser(addedUser);
+      if(newGroup.size() > 0){
+        for (auto i = newGroup.begin(); i != newGroup.end(); i++){
+            outputFile << *i << " ";
+        }
+      outputFile << std::endl;
+      }
+      listOfUsers.push_back(addedUser);
     }
     else if(chooser == 3){
       User addedUser(i%NUMBEROFUSERS,1,&server,3);
-      server.addUser(addedUser);
-      // listOfUsers.push_back(addedUser);
+      newGroup = server.addUser(addedUser);
+      if(newGroup.size() > 0){
+        for (auto i = newGroup.begin(); i != newGroup.end(); i++){
+            outputFile << *i << " ";
+        }
+        outputFile << std::endl;
+      }
+      listOfUsers.push_back(addedUser);
     }
   }
   auto t2 = std::chrono::high_resolution_clock::now();
@@ -144,17 +170,42 @@ void Sim::print_adjMatrix(){
   }
 }
 
-void Sim::simulate_loss(){
-  printf("Simulating removing user from all objects...\n");
-  printf("Removing user %d, from city %d\n",server.getUserList().at(1).getID(), server.getUserList().at(1).getCity());
-  server.removeUser(server.getUserList().at(1));
+
+
+void Sim::averagePing(){
+  std::string line;
+  int count = 0;
+  int sum = 0;
+  inputFile.open("groups_of_users.txt");
+  if (inputFile.is_open()){
+    while(getline(inputFile, line)){
+      sum += calculate_ping(line);
+      count++;
+    }
+    inputFile.close();
+  }
+  return sum/count;
+}
+
+int Sim::calculate_ping(std::string input){
+  int temp= 0;
+  std::vector<int> users;
+  for (unsigned int i = 0; i < input.size();i++){
+    if(input[i] == ' '){
+      users.push_back(temp);
+      temp = 0;
+    }
+    else{
+      temp = temp * 10 + (input[i] - '0');
+    }
+  }
+  for (unsigned int i = 1; i < users.size();i++){
+    server.commandUserPing(users.at(1).getID(),users.at(i).getID());
+  }
 }
 
 int main(){
   Sim simulator_a;
   simulator_a.initialize_Simulator_A();
-  printf("Before\n");
-  simulator_a.print_cities();
-  printf("After\n");
-  simulator_a.print_cities();
+  simulator_a.averagePing();
 }

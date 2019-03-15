@@ -60,9 +60,10 @@ void Server::removeUser(User targetUser){
 int Server::getDistance(int pingingUserCity, int targetUserCity){
   return adjMatrix[pingingUserCity][targetUserCity];
 }
-void Server::addUser(User targetUser){
+std::vector<int> Server::addUser(User targetUser){
   userList.push_back(targetUser);
   cityList[targetUser.getCity()].addUser(targetUser);
+  std::vector<int> zero;
   int loc = userList.size()- 1;
   for(unsigned int i=0; i< userList.size();i++){
     commandUserPing(userList[i],userList[loc]);
@@ -72,10 +73,15 @@ void Server::addUser(User targetUser){
     commandUserPing(userList[loc],userList[i]);
   }
   if(userList.size() > 5)
-    matchmake();
+    return (matchmake());
+  else{
+    return zero;
+  }
 }
-void Server::matchmake(){
+
+std::vector<int> Server::matchmake(){
   std::vector< std::pair<int, std::vector<int> > >count;
+  std::vector<int> final_group;
   int target =0;
   int found = 0;
   for(unsigned int i=0; i<userList.size(); i++){
@@ -87,8 +93,6 @@ void Server::matchmake(){
           count.at(k).second.push_back(userList[i].getID());
           if(count.at(k).second.size() >= 4){
             target = k;
-            // printf("USER %d HAS BROKEN FORMATION", count.at(k).first);
-            // printf("\n");
             break;
           }
           break;
@@ -107,35 +111,27 @@ void Server::matchmake(){
       break;
     }
   }
-
   if(target!=0){
-    printf("List of users: -");
-    for(int i=0; i<count.at(target).second.size();i++){
-      printf(" %d,",count.at(target).second.at(i));
-    }
-    printf(" %d -\n", count.at(target).first);
-    for(int i=0; i<count.at(target).second.size();i++){
+    final_group.push_back(count.at(target).first);
+    for(unsigned int i=0; i<count.at(target).second.size();i++){
       //printf("%d",count.at(target).second.at(i));
-      for(int j=0;j<userList.size();j++){
+      final_group.push_back(count.at(target).second.at(i));
+      for(unsigned int j=0;j<userList.size();j++){
         if(userList[j].getID() == count.at(target).second.at(i)){
           removeUser(userList[j]);
-          // printf("removed userid %d",count.at(target).second.at(i));
           break;
         }
       }
     }
-    for(int j=0;j<userList.size();j++){
+    for(unsigned int j=0;j<userList.size();j++){
       if(userList[j].getID() == count.at(target).first){
           removeUser(userList[j]);
-          // printf("in special case");
-          // printf("removed userid %d",count.at(target).first);
       }
     }
-    // printf("\n");
   }
-  //printf("\n");
-  // Add data about the pinging distance in each group.
+  return (final_group);
 }
+
 void Server::updateMatrix(int distance, City cityOne, City cityTwo){
   int cityOneId = cityOne.getCityNo();
   int cityTwoId = cityTwo.getCityNo();
