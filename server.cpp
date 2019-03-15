@@ -49,11 +49,12 @@ void Server::removeUser(User targetUser){
   for (unsigned int i = 0; i < userList.size(); i++){
     if (targetUser.getID() == userList[i].getID()){
       userList.erase(userList.begin() + i);
+      cityList.at(targetUser.getCity()).removeUser(targetUser);
     }
     else{
       userList[i].removeUser(targetUser);
     }
-    cityList.at(targetUser.getCity()).removeUser(targetUser);
+
   }
 }
 
@@ -72,13 +73,24 @@ std::vector<int> Server::addUser(User targetUser){
   for(unsigned int i=0; i< userList.size();i++){
     commandUserPing(userList[loc],userList[i]);
   }
-  if(userList.size() > 5)
-    return (matchmake());
+  // if(userList.size() > 5)
+  //   return (matchmake());
+  if(userList.size() > 10)
+    return matchmakeRandom();
   else{
     return zero;
   }
 }
-
+std::vector<int> Server::matchmakeRandom(){
+  std::srand((unsigned)time(0));
+  std::vector<int> final_group;
+  for(int i=0; i<5;i++){
+    int randomUser = rand()%userList.size();
+    final_group.push_back(userList[randomUser].getID());
+    removeUser(userList[randomUser]);
+  }
+  return final_group;
+}
 std::vector<int> Server::matchmake(){
   std::vector< std::pair<int, std::vector<int> > >count;
   std::vector<int> final_group;
@@ -133,6 +145,8 @@ std::vector<int> Server::matchmake(){
   }
   return (final_group);
 }
+
+
 
 void Server::updateMatrix(int distance, City cityOne, City cityTwo){
   int cityOneId = cityOne.getCityNo();
