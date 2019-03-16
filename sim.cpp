@@ -61,12 +61,12 @@ void Sim::initialize_Simulator(){
   server.init_cities(tempCityList);
 
 
-  server.updateMatrix(3,a,b);
-  server.updateMatrix(5,a,c);
-  server.updateMatrix(4,b,c);
-  server.updateMatrix(6,b,d);
-  server.updateMatrix(9,a,d);
-  server.updateMatrix(10,c,d);
+  server.updateMatrix(10,a,b);
+  server.updateMatrix(25,a,c);
+  server.updateMatrix(15,b,c);
+  server.updateMatrix(30,b,d);
+  server.updateMatrix(12,a,d);
+  server.updateMatrix(15,c,d);
 
   server.init_city_adjMatrix();
 }
