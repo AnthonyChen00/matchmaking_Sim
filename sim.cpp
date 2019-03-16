@@ -4,7 +4,7 @@
 #include <time.h>       /* time */
 
 #define NUMBEROFUSERS 300
-#define NUMBEROFSIMS 10
+#define NUMBEROFSIMS 50
 
 /* Simulator consisting of 3 cities (1,2,3) and 3 edges.
                   a
@@ -31,7 +31,7 @@ Sim::Sim(){
 Sim::~Sim(){
 
 }
-void Sim::initialize_Simulator()){
+void Sim::initialize_Simulator(){
   //Initialize listOfCities
   City a;
   a.setCityNo(0);
@@ -70,7 +70,7 @@ void Sim::initialize_Simulator()){
   server.updateMatrix(10,c,d);
 
   server.init_city_adjMatrix();
-
+}
 void Sim::create_users(){
   outputFile.open("groups_of_users.txt");
   auto t1 = std::chrono::high_resolution_clock::now();
@@ -127,7 +127,7 @@ void Sim::create_users(){
   }
   outputFile.close();
   auto t2 = std::chrono::high_resolution_clock::now();
-  std::cout << "Simulator A took " << std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count() << "ms to matchmake\n";
+  std::cout << "Simulator took " << std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count() << "ms to matchmake\n";
   // std::cout << "PART E\n";
 }
 
@@ -215,20 +215,32 @@ int main(){
   for (int i = 0; i < NUMBEROFSIMS; i++){
     std::srand((unsigned)time(0)+i);
     Sim simulators;
-    simulator.setMode(1);
+    simulators.setMode(1);
     simulators.initialize_Simulator();
     simulators.create_users();
     outputFile << simulators.averagePing()<< "," << std::endl;
   }
+  outputFile.close();
 
   outputFile.open("Average_ping_random.crv");
   for(int i = 0; i < NUMBEROFSIMS; i++){
     std::srand((unsigned)time(0)+i);
     Sim simulators;
-    simulator.setMode(2)
+    simulators.setMode(2);
     simulators.initialize_Simulator();
     simulators.create_users();
     outputFile << simulators.averagePing()<< "," << std::endl;
   }
+  outputFile.close();
 
+  outputFile.open("Average_ping_geo.crv");
+  for (int i = 0; i < NUMBEROFSIMS; i++){
+    std::srand((unsigned)time(0)+i);
+    Sim simulators;
+    simulators.setMode(0);
+    simulators.initialize_Simulator();
+    simulators.create_users();
+    outputFile << simulators.averagePing()<< "," << std::endl;
+  }
+  outputFile.close();
 }
