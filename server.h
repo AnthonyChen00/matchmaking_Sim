@@ -33,6 +33,7 @@ class Server{
     std::vector<int> matchmake();
     std::vector<int> matchmakeRandom();
     std::vector<int> geolocation();
+    std::vector<int> geolocationHelper(std::pair<int,std::vector<int>> count, std::vector<int> temp);
     void commandUserPing(User pingingUser);
     void commandUserPing(User pingingUser, User pingedUser);
   private:
