@@ -78,6 +78,9 @@ void Sim::initialize_Simulator_A(){
 
   std::cout << "PART D" << std::endl;
   //create users and adding them to list of users
+}
+
+void Sim::create_users(){
   auto t1 = std::chrono::high_resolution_clock::now();
   std::srand((unsigned)time(0));
   for(unsigned int i=0; i<NUMBEROFUSERS; i++){
@@ -217,6 +220,7 @@ double Sim::calculate_ping(std::string input){
 int main(){
   Sim simulator_a;
   simulator_a.initialize_Simulator_A();
+  simulator_a.create_users();
   printf("Average ping of: %fs\n",simulator_a.averagePing());
 
 }
