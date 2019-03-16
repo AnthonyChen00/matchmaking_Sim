@@ -16,7 +16,7 @@ class Sim{
   public:
     Sim();
     ~Sim();
-    void initialize_Simulator_A();
+    void initialize_Simulator();
     void add_city(City newCity);
     void add_user(User newUser);
     void print_cities();
@@ -26,6 +26,7 @@ class Sim{
     void create_users();
     double averagePing();
     double calculate_ping(std::string input);
+    void setMode(int newMode){mode = newMode;}
 
 
   private:

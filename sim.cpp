@@ -3,7 +3,8 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
-#define NUMBEROFUSERS 50
+#define NUMBEROFUSERS 300
+#define NUMBEROFSIMS 10
 
 /* Simulator consisting of 3 cities (1,2,3) and 3 edges.
                   a
@@ -30,13 +31,8 @@ Sim::Sim(){
 Sim::~Sim(){
 
 }
-void Sim::initialize_Simulator_A(){
+void Sim::initialize_Simulator()){
   //Initialize listOfCities
-<<<<<<< HEAD
-=======
-  mode = 0;
->>>>>>> 13f197f621fccabe637c1c17adc47927ae92acc7
-  outputFile.open("groups_of_users.txt");
   City a;
   a.setCityNo(0);
   a.setPercent(50);
@@ -62,29 +58,21 @@ void Sim::initialize_Simulator_A(){
   tempCityList.push_back(b);
   tempCityList.push_back(c);
   tempCityList.push_back(d);
-  // Initializing Server
-  // Server server(tempCityList);
+
   server.init_cities(tempCityList);
 
-  // std::cout << "PART B" << std::endl;
-  //creating the distance matrix of all cities
+
   server.updateMatrix(3,a,b);
   server.updateMatrix(5,a,c);
   server.updateMatrix(4,b,c);
   server.updateMatrix(6,b,d);
   server.updateMatrix(9,a,d);
   server.updateMatrix(10,c,d);
-  // std::cout << "PART C" << std::endl;
-  //updating the distance matrix of all the cities
+
   server.init_city_adjMatrix();
 
-  // printf("cities in server: %d\n",server.getCityList().size());
-
-  // std::cout << "PART D" << std::endl;
-  //create users and adding them to list of users
-}
-
 void Sim::create_users(){
+  outputFile.open("groups_of_users.txt");
   auto t1 = std::chrono::high_resolution_clock::now();
 
   for(unsigned int i=0; i<NUMBEROFUSERS; i++){
@@ -222,11 +210,25 @@ double Sim::calculate_ping(std::string input){
 }
 
 int main(){
-  for (int i = 0; i < 5; i++){
+  std::ofstream outputFile;
+  outputFile.open("Average_ping_normal.crv");
+  for (int i = 0; i < NUMBEROFSIMS; i++){
     std::srand((unsigned)time(0)+i);
     Sim simulators;
-    simulators.initialize_Simulator_A();
+    simulator.setMode(1);
+    simulators.initialize_Simulator();
     simulators.create_users();
-    printf("Average ping of: %fs\n",simulators.averagePing());
+    outputFile << simulators.averagePing()<< "," << std::endl;
   }
+
+  outputFile.open("Average_ping_random.crv");
+  for(int i = 0; i < NUMBEROFSIMS; i++){
+    std::srand((unsigned)time(0)+i);
+    Sim simulators;
+    simulator.setMode(2)
+    simulators.initialize_Simulator();
+    simulators.create_users();
+    outputFile << simulators.averagePing()<< "," << std::endl;
+  }
+
 }
