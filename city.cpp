@@ -36,9 +36,6 @@ int City::getDistance(int cityID){
   return(adjMatrix[cityNo][cityID]);
 }
 
-// void City::addCity(int distance[]){
-//   //add a new city of adjmatrix
-// }
 
 void City::addUser(User targetUser){
   Users.push_back(targetUser);

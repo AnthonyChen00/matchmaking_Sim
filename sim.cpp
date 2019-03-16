@@ -4,6 +4,7 @@
 #include <time.h>       /* time */
 
 #define NUMBEROFUSERS 50
+
 /* Simulator consisting of 3 cities (1,2,3) and 3 edges.
                   a
               3->/ \ <- 5
@@ -31,6 +32,7 @@ Sim::~Sim(){
 }
 void Sim::initialize_Simulator_A(){
   //Initialize listOfCities
+  mode = 1;
   outputFile.open("groups_of_users.txt");
   City a;
   a.setCityNo(0);
@@ -76,6 +78,9 @@ void Sim::initialize_Simulator_A(){
 
   std::cout << "PART D" << std::endl;
   //create users and adding them to list of users
+}
+
+void Sim::create_users(){
   auto t1 = std::chrono::high_resolution_clock::now();
   std::srand((unsigned)time(0));
   for(unsigned int i=0; i<NUMBEROFUSERS; i++){
@@ -85,7 +90,7 @@ void Sim::initialize_Simulator_A(){
     chooser = i % 4;
     if(chooser == 0){
       User addedUser(i%NUMBEROFUSERS,std::rand()%3+1,&server,0);
-      newGroup = server.addUser(addedUser);
+      newGroup = server.addUser(addedUser,mode);
       if(newGroup.size() > 0){
       for (auto i = newGroup.begin(); i != newGroup.end(); i++){
           outputFile << *i << " ";
@@ -96,7 +101,7 @@ void Sim::initialize_Simulator_A(){
     }
     else if(chooser == 1){
       User addedUser(i%NUMBEROFUSERS,std::rand()%3+1,&server,1);
-      newGroup = server.addUser(addedUser);
+      newGroup = server.addUser(addedUser,mode);
       if(newGroup.size() > 0){
         for (auto i = newGroup.begin(); i != newGroup.end(); i++){
             outputFile << *i << " ";
@@ -107,7 +112,7 @@ void Sim::initialize_Simulator_A(){
   }
     else if(chooser == 2){
       User addedUser(i%NUMBEROFUSERS,std::rand()%3+1,&server,2);
-      newGroup = server.addUser(addedUser);
+      newGroup = server.addUser(addedUser,mode);
       if(newGroup.size() > 0){
         for (auto i = newGroup.begin(); i != newGroup.end(); i++){
             outputFile << *i << " ";
@@ -118,7 +123,7 @@ void Sim::initialize_Simulator_A(){
     }
     else if(chooser == 3){
       User addedUser(i%NUMBEROFUSERS,std::rand()%3+1,&server,3);
-      newGroup = server.addUser(addedUser);
+      newGroup = server.addUser(addedUser,mode);
       if(newGroup.size() > 0){
         for (auto i = newGroup.begin(); i != newGroup.end(); i++){
             outputFile << *i << " ";
@@ -215,6 +220,7 @@ double Sim::calculate_ping(std::string input){
 int main(){
   Sim simulator_a;
   simulator_a.initialize_Simulator_A();
+  simulator_a.create_users();
   printf("Average ping of: %fs\n",simulator_a.averagePing());
 
 }

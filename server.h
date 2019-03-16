@@ -25,7 +25,7 @@ class Server{
     void init_cities(std::vector<City> cities);
     void printCity();
     void printUsers();
-    std::vector<int> addUser(User targetUser);
+    std::vector<int> addUser(User targetUser, int mode);
     void removeUser(User targetUser);
     int getDistance(int pingingUserCity, int targetUserCity);
     void updateMatrix(int distance, City cityOne, City cityTwo); //updating the adjacent matrix

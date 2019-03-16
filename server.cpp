@@ -61,7 +61,7 @@ void Server::removeUser(User targetUser){
 int Server::getDistance(int pingingUserCity, int targetUserCity){
   return adjMatrix[pingingUserCity][targetUserCity];
 }
-std::vector<int> Server::addUser(User targetUser){
+std::vector<int> Server::addUser(User targetUser, int mode){
   userList.push_back(targetUser);
   cityList[targetUser.getCity()].addUser(targetUser);
   std::vector<int> zero;
@@ -73,12 +73,19 @@ std::vector<int> Server::addUser(User targetUser){
   for(unsigned int i=0; i< userList.size();i++){
     commandUserPing(userList[loc],userList[i]);
   }
-  if(userList.size() > 5)
-    return geolocation();
-  // if(userList.size() > 5)
-  //   return (matchmake());
-  // if(userList.size() > 10)
-  //   return matchmakeRandom();
+  if(userList.size() > 5){
+    switch(mode){
+      case 0:
+        return geolocation();
+        break;
+      case 1:
+        return matchmake();
+        break;
+      case 2:
+        return matchmakeRandom();
+        break;
+    }
+  }
   else{
     return zero;
   }
