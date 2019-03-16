@@ -78,8 +78,8 @@ void Sim::create_users(){
     std::vector<int> newGroup;
     int chooser;
     //chooser = std::rand()%4; // 4 for the amount of cities.
-    chooser = i % 4;
-    if(chooser == 0){
+    chooser = std::rand()%100;
+    if(chooser >= 50){
       User addedUser(i%NUMBEROFUSERS,std::rand()%3+1,&server,0);
       newGroup = server.addUser(addedUser,mode);
       if(newGroup.size() > 0){
@@ -90,7 +90,7 @@ void Sim::create_users(){
       }
       listOfUsers.push_back(addedUser);
     }
-    else if(chooser == 1){
+    else if(chooser >= 30 && chooser < 50){
       User addedUser(i%NUMBEROFUSERS,std::rand()%3+1,&server,1);
       newGroup = server.addUser(addedUser,mode);
       if(newGroup.size() > 0){
@@ -101,7 +101,7 @@ void Sim::create_users(){
       }
       listOfUsers.push_back(addedUser);
   }
-    else if(chooser == 2){
+    else if(chooser >= 10 && chooser < 30){
       User addedUser(i%NUMBEROFUSERS,std::rand()%3+1,&server,2);
       newGroup = server.addUser(addedUser,mode);
       if(newGroup.size() > 0){
@@ -112,7 +112,7 @@ void Sim::create_users(){
       }
       listOfUsers.push_back(addedUser);
     }
-    else if(chooser == 3){
+    else if(chooser < 10){
       User addedUser(i%NUMBEROFUSERS,std::rand()%3+1,&server,3);
       newGroup = server.addUser(addedUser,mode);
       if(newGroup.size() > 0){
