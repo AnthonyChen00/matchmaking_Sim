@@ -174,15 +174,17 @@ std::vector<int> Server::geolocation(){
         for(unsigned int j=0; j<waitingHosts.size();j++){
           if(waitingHosts[j].first == count.at(target[i]).first){
             foundHost = 1;
-            waitingHosts[j].second = waitingHosts[j] + 1;
+            waitingHosts[j].second = waitingHosts[j].second + 1;
             if(waitingHosts[j].second > percentage){
               // QUEUE UP
             }
-            else
+            else{
+
+            }
           }
         }
         if(foundHost == 0){
-          waitingHosts.push_back(count.at(target[i].first),0);
+          waitingHosts.push_back(std::pair<int,int>(count.at(target[i]).first,0));
         }
       }
       //do geolocation stuff
