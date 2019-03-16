@@ -33,6 +33,7 @@ class Sim{
     std::vector< std::vector<int> > adjMatrix;
     std::ofstream outputFile;
     std::ifstream inputFile;
+    int mode; //0 - geolocation, 1 - ping matchmaking, 2 - random matchmaking
   };
 
 #endif

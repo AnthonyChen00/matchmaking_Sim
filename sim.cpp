@@ -4,6 +4,7 @@
 #include <time.h>       /* time */
 
 #define NUMBEROFUSERS 50
+
 /* Simulator consisting of 3 cities (1,2,3) and 3 edges.
                   a
               3->/ \ <- 5
@@ -31,6 +32,7 @@ Sim::~Sim(){
 }
 void Sim::initialize_Simulator_A(){
   //Initialize listOfCities
+  mode = 1;
   outputFile.open("groups_of_users.txt");
   City a;
   a.setCityNo(0);
@@ -85,7 +87,7 @@ void Sim::initialize_Simulator_A(){
     chooser = i % 4;
     if(chooser == 0){
       User addedUser(i%NUMBEROFUSERS,std::rand()%3+1,&server,0);
-      newGroup = server.addUser(addedUser);
+      newGroup = server.addUser(addedUser,mode);
       if(newGroup.size() > 0){
       for (auto i = newGroup.begin(); i != newGroup.end(); i++){
           outputFile << *i << " ";
@@ -96,7 +98,7 @@ void Sim::initialize_Simulator_A(){
     }
     else if(chooser == 1){
       User addedUser(i%NUMBEROFUSERS,std::rand()%3+1,&server,1);
-      newGroup = server.addUser(addedUser);
+      newGroup = server.addUser(addedUser,mode);
       if(newGroup.size() > 0){
         for (auto i = newGroup.begin(); i != newGroup.end(); i++){
             outputFile << *i << " ";
@@ -107,7 +109,7 @@ void Sim::initialize_Simulator_A(){
   }
     else if(chooser == 2){
       User addedUser(i%NUMBEROFUSERS,std::rand()%3+1,&server,2);
-      newGroup = server.addUser(addedUser);
+      newGroup = server.addUser(addedUser,mode);
       if(newGroup.size() > 0){
         for (auto i = newGroup.begin(); i != newGroup.end(); i++){
             outputFile << *i << " ";
@@ -118,7 +120,7 @@ void Sim::initialize_Simulator_A(){
     }
     else if(chooser == 3){
       User addedUser(i%NUMBEROFUSERS,std::rand()%3+1,&server,3);
-      newGroup = server.addUser(addedUser);
+      newGroup = server.addUser(addedUser,mode);
       if(newGroup.size() > 0){
         for (auto i = newGroup.begin(); i != newGroup.end(); i++){
             outputFile << *i << " ";
