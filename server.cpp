@@ -76,14 +76,17 @@ std::vector<int> Server::addUser(User targetUser, int mode){
   if(userList.size() > 5){
     switch(mode){
       case 0:
+        std::cout<< mode << std::endl;
         return geolocation();
-        break;
+
       case 1:
+        std::cout<< mode << std::endl;
         return matchmake();
-        break;
+
       case 2:
+        std::cout<< mode << std::endl;
         return matchmakeRandom();
-        break;
+
     }
   }
   else{

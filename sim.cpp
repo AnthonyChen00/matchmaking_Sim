@@ -50,7 +50,6 @@ void Sim::initialize_Simulator(){
   d.setPercent(10);
   add_city(d);
 
-  mode = 1;
   // std::cout << "PART A" << std::endl;
   //creating cities
   std::vector<City> tempCityList;
