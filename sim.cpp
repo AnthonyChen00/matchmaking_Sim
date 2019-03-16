@@ -32,6 +32,10 @@ Sim::~Sim(){
 }
 void Sim::initialize_Simulator_A(){
   //Initialize listOfCities
+<<<<<<< HEAD
+=======
+  mode = 0;
+>>>>>>> 13f197f621fccabe637c1c17adc47927ae92acc7
   outputFile.open("groups_of_users.txt");
   City a;
   a.setCityNo(0);

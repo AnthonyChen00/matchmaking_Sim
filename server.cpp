@@ -176,10 +176,11 @@ std::vector<int> Server::geolocation(){
             foundHost = 1;
             waitingHosts[j].second = waitingHosts[j].second + 1;
             if(waitingHosts[j].second > percentage){
-              // QUEUE UP
+              waitingHosts.erase(waitingHosts.begin()+j);
+              return geolocationHelper(count.at(target[i]),temp[i]);
             }
             else{
-
+              break;
             }
           }
         }
@@ -187,7 +188,6 @@ std::vector<int> Server::geolocation(){
           waitingHosts.push_back(std::pair<int,int>(count.at(target[i]).first,0));
         }
       }
-      //do geolocation stuff
     }
     else{
       final_group.push_back(count.at(target.at(desiredHost)).first);
@@ -209,6 +209,42 @@ std::vector<int> Server::geolocation(){
     }
   }
   return (final_group);
+}
+std::vector<int> Server::geolocationHelper(std::pair<int,std::vector<int>> count, std::vector<int> temp){
+  std::vector<int> final_group;
+  final_group.push_back(count.first);
+  int counter = 0;
+  for(unsigned int j=0; j<temp.size(); j++){
+    final_group.push_back(count.second.at(temp[j]));
+    for(unsigned int k=0;k<userList.size();k++){
+      if(userList[k].getID() == count.second.at(temp[j])){
+        count.second.erase(count.second.begin()+(temp[j]));
+        removeUser(userList[k]);
+        counter++;
+        break;
+      }
+    }
+  }
+  for(unsigned int i=0; i<count.second.size(); i++){
+    if(counter > 3){
+      break;
+    }
+    final_group.push_back(count.second.at(i));
+    for(unsigned int j=0; j<userList.size();j++){
+      if(userList[j].getID() == count.second.at(i)){
+        removeUser(userList[j]);
+        counter++;
+        break;
+      }
+    }
+  }
+  for(unsigned int i=0; i<userList.size();i++){
+    if(userList[i].getID() == count.first){
+      removeUser(userList[i]);
+      break;
+    }
+  }
+  return final_group;
 }
 
 std::vector<int> Server::matchmake(){
