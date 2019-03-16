@@ -126,7 +126,7 @@ void Sim::create_users(){
   }
   outputFile.close();
   auto t2 = std::chrono::high_resolution_clock::now();
-  std::cout << "Simulator took " << std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count() << "ms to matchmake\n";
+  // std::cout << "Simulator took " << std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count() << "ms to matchmake\n";
   // std::cout << "PART E\n";
 }
 
@@ -211,15 +211,20 @@ double Sim::calculate_ping(std::string input){
 int main(){
   std::ofstream outputFile;
   outputFile.open("Average_ping_normal.crv");
+  double sum = 0.0;
   for (int i = 0; i < NUMBEROFSIMS; i++){
     std::srand((unsigned)time(0)+i);
     Sim simulators;
     simulators.setMode(1);
     simulators.initialize_Simulator();
     simulators.create_users();
-    outputFile << simulators.averagePing()<< "," << std::endl;
+    double ping = simulators.averagePing();
+    outputFile << ping << "," << std::endl;
+    sum += ping;
   }
+  std::cout<<"Normal method average ping is: " << sum/NUMBEROFSIMS << std::endl;
   outputFile.close();
+  sum = 0.0;
 
   outputFile.open("Average_ping_random.crv");
   for(int i = 0; i < NUMBEROFSIMS; i++){
@@ -228,9 +233,13 @@ int main(){
     simulators.setMode(2);
     simulators.initialize_Simulator();
     simulators.create_users();
-    outputFile << simulators.averagePing()<< "," << std::endl;
+    double ping = simulators.averagePing();
+    outputFile << ping << "," << std::endl;
+    sum += ping;
   }
+  std::cout<<"Random method average ping is: " << sum/NUMBEROFSIMS << std::endl;
   outputFile.close();
+  sum = 0.0;
 
   outputFile.open("Average_ping_geo.crv");
   for (int i = 0; i < NUMBEROFSIMS; i++){
@@ -239,7 +248,10 @@ int main(){
     simulators.setMode(0);
     simulators.initialize_Simulator();
     simulators.create_users();
-    outputFile << simulators.averagePing()<< "," << std::endl;
+    double ping = simulators.averagePing();
+    outputFile << ping << "," << std::endl;
+    sum += ping;
   }
+  std::cout<<"Geolocation method average ping is: " << sum/NUMBEROFSIMS << std::endl;
   outputFile.close();
 }
