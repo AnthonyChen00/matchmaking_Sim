@@ -14,7 +14,8 @@ class City{
     ~City();
 
     int getCityNo(){return cityNo;}
-    int setPercent(int newPercent){percent = newPercent};
+    void setPercent(int newPercent){percent = newPercent;};
+    int getPercent(){return percent;}
     void setCityNo(int newCityNo){cityNo = newCityNo;} // update/assign the current City ID
 
     std::vector<User> getUsers(){return Users;}

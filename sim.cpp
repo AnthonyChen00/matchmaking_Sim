@@ -38,7 +38,7 @@ void Sim::initialize_Simulator_A(){
   add_city(a);
   City b;
   b.setCityNo(1);
-  b.setPercent(20)
+  b.setPercent(20);
   add_city(b);
   City c;
   c.setCityNo(2);
@@ -81,7 +81,8 @@ void Sim::initialize_Simulator_A(){
   for(unsigned int i=0; i<NUMBEROFUSERS; i++){
     std::vector<int> newGroup;
     int chooser;
-    chooser = std::rand()%4; // 4 for the amount of cities.
+    //chooser = std::rand()%4; // 4 for the amount of cities.
+    chooser = i % 4;
     if(chooser == 0){
       User addedUser(i%NUMBEROFUSERS,std::rand()%3+1,&server,0);
       newGroup = server.addUser(addedUser);

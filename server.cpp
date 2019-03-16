@@ -74,7 +74,9 @@ std::vector<int> Server::addUser(User targetUser){
     commandUserPing(userList[loc],userList[i]);
   }
   if(userList.size() > 5)
-    return (matchmake());
+    return geolocation();
+  // if(userList.size() > 5)
+  //   return (matchmake());
   // if(userList.size() > 10)
   //   return matchmakeRandom();
   else{
@@ -120,38 +122,74 @@ std::vector<int> Server::geolocation(){
     }
   }
   if(target.size()!=0){
-    int temp[target.size()];
-    int desiredHost = 0;
+    std::vector< std::vector<int> > temp(target.size());
+    int desiredHost = -1;
     int targetCity;
     for (unsigned int i = 0 ; i < target.size();i++){
       for(unsigned int m =0; m<userList.size();m++){
-        if(userList[m].getID() == count.at(target[m]).first){
+        if(userList[m].getID() == count.at(target[i]).first){
           targetCity = userList[m].getCity();
         }
       }
       for (unsigned int j = 0; j < cityList[targetCity].getUsers().size();j++){
         for (unsigned int k = 0; k < count.at(target[i]).second.size();k++){
-            if (count.at(target[i]).second.at(k) == cityList[targetCity].getUsers().at(j)){
-              temp[i]++;
-            }
-            if (temp[i] > 3){
-              desiredHost = i;
-              break;
-            }
+          if (count.at(target[i]).second.at(k) == cityList[targetCity].getUsers().at(j).getID()){
+            temp[i].push_back(k);
+          }
+          if (temp[i].size() > 3){
+            desiredHost = i;
+            break;
+          }
         }
-        if (temp[i] > 3){
+        if (temp[i].size() > 3){
           break;
         }
       }
-      if (temp[i] > 3){
+      if (temp[i].size() > 3){
         break;
       }
     }
-    if (desiredHost == 0){
+    if (desiredHost == -1){
+      int foundHost = 0;
+      int percentage = 0;
+      for (unsigned int i=0 ; i < target.size();i++){
+        for(unsigned int m=0; m<userList.size();m++){
+          if(userList[m].getID() == count.at(target[i]).first){
+            targetCity = userList[m].getCity();
+          }
+        }
+      }
+      for(unsigned int n=0; n<cityList.size();n++){
+        if(targetCity == cityList[n].getCityNo()){
+          percentage = cityList[n].getPercent() / 100;
+        }
+      }
+      for(unsigned int i=0; i<waitingHosts.size();i++){
+        for(unsigned int j=0; j<target.size();j++){
+          if(waitingHosts[i].first == count.at(target[j]).first){
+            foundHost = 1;
+          }
+        }
+      }
       //do geolocation stuff
     }
     else{
-      //make final_group
+      final_group.push_back(count.at(target.at(desiredHost)).first);
+      for(unsigned int i=0; i<temp[desiredHost].size();i++){
+        final_group.push_back(count.at(target.at(desiredHost)).second.at(temp[desiredHost].at(i)));
+        for(unsigned int j=0; j<userList.size();j++){
+          if(userList[j].getID() == count.at(target.at(desiredHost)).second.at(temp[desiredHost].at(i))){
+            removeUser(userList[j]);
+            break;
+          }
+        }
+      }
+      for(unsigned int j=0; j<userList.size();j++){
+        if(userList[j].getID() == count.at(target.at(desiredHost)).first){
+          removeUser(userList[j]);
+          break;
+        }
+      }
     }
   }
   return (final_group);
