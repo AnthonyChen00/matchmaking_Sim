@@ -153,26 +153,29 @@ std::vector<int> Server::geolocation(){
       int foundHost = 0;
       int percentage = 0;
       for (unsigned int i=0 ; i < target.size();i++){
+        foundHost = 0;
         for(unsigned int m=0; m<userList.size();m++){
           if(userList[m].getID() == count.at(target[i]).first){
             targetCity = userList[m].getCity();
           }
         }
-      }
-      for(unsigned int n=0; n<cityList.size();n++){
-        if(targetCity == cityList[n].getCityNo()){
-          percentage = cityList[n].getPercent() / 100;
+        for(unsigned int n=0; n<cityList.size();n++){
+          if(targetCity == cityList[n].getCityNo()){
+            percentage = cityList[n].getPercent() / 10;
+          }
         }
-      }
-      for(unsigned int i=0; i<target.size();i++){
-        foundHost = 0;
         for(unsigned int j=0; j<waitingHosts.size();j++){
           if(waitingHosts[j].first == count.at(target[i]).first){
             foundHost = 1;
+            waitingHosts[j].second = waitingHosts[j] + 1;
+            if(waitingHosts[j].second > percentage){
+              // QUEUE UP
+            }
+            else
           }
         }
         if(foundHost == 0){
-
+          waitingHosts.push_back(count.at(target[i].first),0);
         }
       }
       //do geolocation stuff
