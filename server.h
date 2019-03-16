@@ -9,7 +9,7 @@
 class City;
 class User;
 
-#define DESIRED_PING 10
+#define DESIRED_PING 5
 //Server maintains a userlist and tell users to ping other users to update the list
 class Server{
   public:
