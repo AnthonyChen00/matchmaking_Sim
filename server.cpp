@@ -179,9 +179,6 @@ std::vector<int> Server::geolocation(){
               waitingHosts.erase(waitingHosts.begin()+j);
               return geolocationHelper(count.at(target[i]),temp[i]);
             }
-            else{
-              break;
-            }
           }
         }
         if(foundHost == 0){
@@ -213,27 +210,42 @@ std::vector<int> Server::geolocation(){
 std::vector<int> Server::geolocationHelper(std::pair<int,std::vector<int>> count, std::vector<int> temp){
   std::vector<int> final_group;
   final_group.push_back(count.first);
-  int counter = 0;
+  int counter = temp.size();
   for(unsigned int j=0; j<temp.size(); j++){
     final_group.push_back(count.second.at(temp[j]));
     for(unsigned int k=0;k<userList.size();k++){
       if(userList[k].getID() == count.second.at(temp[j])){
-        count.second.erase(count.second.begin()+(temp[j]));
         removeUser(userList[k]);
-        counter++;
         break;
       }
     }
   }
-  for(unsigned int i=0; i<count.second.size(); i++){
-    if(counter > 3){
-      break;
-    }
-    final_group.push_back(count.second.at(i));
+  int iterator = 0;
+
+  for(unsigned int j=0; j<temp.size();j++){
+    count.second.erase(count.second.begin()+temp[j]-iterator);
+    iterator++;
+  }
+  // for(unsigned int i=0; i<count.second.size(); i++){
+  //   if(counter > 3){
+  //     break;
+  //   }
+  //   final_group.push_back(count.second.at(i));
+  //   for(unsigned int j=0; j<userList.size();j++){
+  //     if(userList[j].getID() == count.second.at(i)){
+  //       removeUser(userList[j]);
+  //       counter++;
+  //       break;
+  //     }
+  //   }
+  // }
+  std::srand((unsigned)time(0));
+  for(unsigned int i=counter; i<5;i++){
+    int random = std::rand()%count.second.size();
+    final_group.push_back(count.second.at(random));
     for(unsigned int j=0; j<userList.size();j++){
-      if(userList[j].getID() == count.second.at(i)){
+      if(userList[j].getID() == count.second.at(random)){
         removeUser(userList[j]);
-        counter++;
         break;
       }
     }
