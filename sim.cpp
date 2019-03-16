@@ -32,7 +32,6 @@ Sim::~Sim(){
 }
 void Sim::initialize_Simulator_A(){
   //Initialize listOfCities
-  mode = 1;
   outputFile.open("groups_of_users.txt");
   City a;
   a.setCityNo(0);
@@ -51,7 +50,8 @@ void Sim::initialize_Simulator_A(){
   d.setPercent(10);
   add_city(d);
 
-  std::cout << "PART A" << std::endl;
+  mode = 1;
+  // std::cout << "PART A" << std::endl;
   //creating cities
   std::vector<City> tempCityList;
   tempCityList.push_back(a);
@@ -62,7 +62,7 @@ void Sim::initialize_Simulator_A(){
   // Server server(tempCityList);
   server.init_cities(tempCityList);
 
-  std::cout << "PART B" << std::endl;
+  // std::cout << "PART B" << std::endl;
   //creating the distance matrix of all cities
   server.updateMatrix(3,a,b);
   server.updateMatrix(5,a,c);
@@ -70,19 +70,19 @@ void Sim::initialize_Simulator_A(){
   server.updateMatrix(6,b,d);
   server.updateMatrix(9,a,d);
   server.updateMatrix(10,c,d);
-  std::cout << "PART C" << std::endl;
+  // std::cout << "PART C" << std::endl;
   //updating the distance matrix of all the cities
   server.init_city_adjMatrix();
 
   // printf("cities in server: %d\n",server.getCityList().size());
 
-  std::cout << "PART D" << std::endl;
+  // std::cout << "PART D" << std::endl;
   //create users and adding them to list of users
 }
 
 void Sim::create_users(){
   auto t1 = std::chrono::high_resolution_clock::now();
-  std::srand((unsigned)time(0));
+
   for(unsigned int i=0; i<NUMBEROFUSERS; i++){
     std::vector<int> newGroup;
     int chooser;
@@ -136,7 +136,7 @@ void Sim::create_users(){
   outputFile.close();
   auto t2 = std::chrono::high_resolution_clock::now();
   std::cout << "Simulator A took " << std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count() << "ms to matchmake\n";
-  std::cout << "PART E\n";
+  // std::cout << "PART E\n";
 }
 
 void Sim::add_city(City newCity){
@@ -218,9 +218,11 @@ double Sim::calculate_ping(std::string input){
 }
 
 int main(){
-  Sim simulator_a;
-  simulator_a.initialize_Simulator_A();
-  simulator_a.create_users();
-  printf("Average ping of: %fs\n",simulator_a.averagePing());
-
+  for (int i = 0; i < 5; i++){
+    std::srand((unsigned)time(0)+i);
+    Sim simulators;
+    simulators.initialize_Simulator_A();
+    simulators.create_users();
+    printf("Average ping of: %fs\n",simulators.averagePing());
+  }
 }

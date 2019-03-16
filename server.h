@@ -35,12 +35,14 @@ class Server{
     std::vector<int> geolocation();
     void commandUserPing(User pingingUser);
     void commandUserPing(User pingingUser, User pingedUser);
+    void setMode(int mode);
   private:
     std::vector< std::vector<int> > adjMatrix;
     std::vector< std::vector<User> > userGroups;
     std::vector< City > cityList;
     std::vector< User > userList;
     std::vector< std::pair< int,int> > waitingHosts;
+
 };
 
 #endif
