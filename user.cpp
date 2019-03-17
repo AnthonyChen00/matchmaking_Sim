@@ -18,7 +18,6 @@ User::~User(){
 
 // Both pingALL and ping should update addwantedHosts if needed to.
 void User::pingAll(std::vector<User> users){
-  // int desired_ping = 100 //to bypass error, need to implenment
   for(unsigned int i=0; i<users.size(); i++){
     ping(users[i]);
   }
@@ -29,9 +28,7 @@ double User::ping(User target){
     return 0;
   }
   int distance = server->getDistance(getCity(),target.getCity());
-  // printf("The distance: %d and the bandwidth: %d and the DESIRED_PING is %d \n", distance,bandwidth,DESIRED_PING);
   if(distance*1.0/bandwidth < DESIRED_PING){
-    // printf("added \n");
     addWantedHosts(target);
     return (distance*1.0/bandwidth);
   }

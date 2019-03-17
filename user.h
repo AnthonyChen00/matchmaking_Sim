@@ -26,14 +26,19 @@ class User{
     void setBandWidth(int new_bandwidth){bandwidth = new_bandwidth;}
     Server* getServer(){return server;}
     int getCity(){return cityID;}
-    std::vector<int> getWantedHosts(){return wantedHosts;}
-    void addWantedHosts(User wantedHost);
     void setWantedHosts(std::vector<int> userWanted);
-
+    std::vector<int> getWantedHosts(){return wantedHosts;}
     // Member Functions
+
+    // Add a user into the wantedHost vector of a user
+    void addWantedHosts(User wantedHost);
+    // Removing a user from the wantedHosts vector
     void removeUser(User targetUser);
+    // Pinging another user
     double ping(User target);
+    // Pinging all other users within the userList of server
     void pingAll(std::vector<User> users);
+    // Send updated wantedHost vector to the server
     void send();
 
   private:

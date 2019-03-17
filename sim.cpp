@@ -6,23 +6,22 @@
 #define NUMBEROFUSERS 50000
 #define NUMBEROFSIMS 1
 
-/* Simulator consisting of 3 cities (1,2,3) and 3 edges.
+/* Simulator consisting of 4 cities (1,2,3,4) and 4 edges.
                   a
-              3->/ \ <- 5
+            10 ->/ \ <- 25
                 b--c
-            6> /  ^4
+          30 > /  ^15
               d
 
-30 users initialized with:
+5000 users initialized with:
 bandwidth = 10
-spread out evenly among cities, added to cities in order of (a,b,c,d)
 
  adjacent matrix repesentation
     a b c d
-  a|0|3|5|0
-  b|3|0|4|6
-  c|5|4|0|0
-  d|0|6|0|0
+  a|0|10|25|12
+  b|10|0|15|30
+  c|25|15|0|15
+  d|12|30|15|0
 */
 
 Sim::Sim(){
@@ -50,8 +49,6 @@ void Sim::initialize_Simulator(){
   d.setPercent(10);
   add_city(d);
 
-  // std::cout << "PART A" << std::endl;
-  //creating cities
   std::vector<City> tempCityList;
   tempCityList.push_back(a);
   tempCityList.push_back(b);
@@ -77,7 +74,6 @@ void Sim::create_users(){
   for(unsigned int i=0; i<NUMBEROFUSERS; i++){
     std::vector<int> newGroup;
     int chooser;
-    //chooser = std::rand()%4; // 4 for the amount of cities.
     chooser = std::rand()%100;
     if(chooser >= 50){
       User addedUser(i%NUMBEROFUSERS,std::rand()%3+1,&server,0);
@@ -127,9 +123,12 @@ void Sim::create_users(){
   outputFile.close();
   outputFile.open("Average_time.csv");
   auto t2 = std::chrono::high_resolution_clock::now();
+<<<<<<< HEAD
   outputFile << std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count() <<",";
   outputFile.close();
   // std::cout << "PART E\n";
+=======
+>>>>>>> 582adba165ba1be529b7403ec3ebf366658a5d57
 }
 
 void Sim::add_city(City newCity){
@@ -143,7 +142,6 @@ void Sim::print_cities(){
   for(unsigned int i=0; i<server.getCityList().size();i++){
     printf("City %d:", server.getCityList().at(i).getCityNo());
     server.getCityList().at(i).printUsers();
-    // print_Uservector(server.getCityList().at(i).getUsers());
     std::cout << std::endl;
   }
 }
