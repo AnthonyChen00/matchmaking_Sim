@@ -82,8 +82,12 @@ std::vector<int> Server::addUser(User targetUser, int mode){
         return matchmake();
 
       case 2:
-        return matchmakeRandom();
-
+        if (userList.size() > 10){
+          return matchmakeRandom();
+        }
+        else{
+          return zero;
+        }
     }
   }
   else{

@@ -27,7 +27,7 @@ class Sim{
     double averagePing();
     double calculate_ping(std::string input);
     void setMode(int newMode){mode = newMode;}
-
+    void processTime();
 
   private:
     Server server;
