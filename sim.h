@@ -14,19 +14,33 @@ class City;
 
 class Sim{
   public:
+    
     Sim();
     ~Sim();
+
+    // Create simulator and cities
     void initialize_Simulator();
+    // Add cities into simulator
     void add_city(City newCity);
+    // Add user into simulator
     void add_user(User newUser);
+    // Print current cities
     void print_cities();
+    // Print current users
     void print_users();
+    // Print users' wantedHosts
     void print_Uservector(std::vector<User> printing);
+    // Print adjacent matrix
     void print_adjMatrix();
+    // create NUMBEROFUSERS users
     void create_users();
+    // calculate average ping
     double averagePing();
+    // calculate average ping file parse
     double calculate_ping(std::string input);
+    // set mode for which matchmaking
     void setMode(int newMode){mode = newMode;}
+    // calculate average time
     void processTime();
 
   private:

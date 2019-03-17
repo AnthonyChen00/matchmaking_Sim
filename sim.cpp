@@ -252,34 +252,34 @@ int main(){
   outputFile1.close();
   sum = 0.0;
 
-  // outputFile1.open("Average_ping_random.csv");
-  // for(int i = 0; i < NUMBEROFSIMS; i++){
-  //   std::srand((unsigned)time(0)+i);
-  //   Sim simulators;
-  //   simulators.setMode(2);
-  //   simulators.initialize_Simulator();
-  //   simulators.create_users();
-  //   double ping = simulators.averagePing();
-  //   outputFile1 << ping << "," << std::endl;
-  //   sum += ping;
-  //   simulators.processTime();
-  // }
-  // std::cout<<"Random method average ping is: " << sum/NUMBEROFSIMS << std::endl;
-  // outputFile1.close();
-  // sum = 0.0;
-  //
-  // outputFile1.open("Average_ping_geo.csv");
-  // for (int i = 0; i < NUMBEROFSIMS; i++){
-  //   std::srand((unsigned)time(0)+i);
-  //   Sim simulators;
-  //   simulators.setMode(0);
-  //   simulators.initialize_Simulator();
-  //   simulators.create_users();
-  //   double ping = simulators.averagePing();
-  //   outputFile1 << ping << "," << std::endl;
-  //   sum += ping;
-  //   simulators.processTime();
-  // }
-  // std::cout<<"Geolocation method average ping is: " << sum/NUMBEROFSIMS << std::endl;
-  // outputFile1.close();
+  outputFile1.open("Average_ping_random.csv");
+  for(int i = 0; i < NUMBEROFSIMS; i++){
+    std::srand((unsigned)time(0)+i);
+    Sim simulators;
+    simulators.setMode(2);
+    simulators.initialize_Simulator();
+    simulators.create_users();
+    double ping = simulators.averagePing();
+    outputFile1 << ping << "," << std::endl;
+    sum += ping;
+    simulators.processTime();
+  }
+  std::cout<<"Random method average ping is: " << sum/NUMBEROFSIMS << std::endl;
+  outputFile1.close();
+  sum = 0.0;
+
+  outputFile1.open("Average_ping_geo.csv");
+  for (int i = 0; i < NUMBEROFSIMS; i++){
+    std::srand((unsigned)time(0)+i);
+    Sim simulators;
+    simulators.setMode(0);
+    simulators.initialize_Simulator();
+    simulators.create_users();
+    double ping = simulators.averagePing();
+    outputFile1 << ping << "," << std::endl;
+    sum += ping;
+    simulators.processTime();
+  }
+  std::cout<<"Geolocation method average ping is: " << sum/NUMBEROFSIMS << std::endl;
+  outputFile1.close();
 }
