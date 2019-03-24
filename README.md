@@ -1,12 +1,5 @@
+>The main purpose behind this project is to analyze and weigh the consequences of using geolocation as a tool to create more optimized groupings in matchmaking queues. This will be tested with a live queue of users, and our server will create groupings of five within the users. One user will be the host of that group, meaning that all of the other users in the group are connecting to that one host. Their connection status will be calculated through pinging. We will be analyzing the efficiency of our matchmaking algorithm using mainly 2 criteria:
+>Time: The time it takes for the algorithm to successfully create all the groupings within a set amount of users.
+Lower Overall Ping: The average amount of ping among the users within the group in respect to the host of the group.
 
-Currently I have been writing the methods for the individual classes and trying to figure out the relationship among the different classes. I will list the concerns that came up throughout the night. These concerns will have a tag that to indicate where/what file i meant within the code. just [ctrl + f] for the comment tag.
-
-Concerns:
-
-| Tag | Comment/Concern |
-| ------ |:------------------------------------------------------------------ |
-| [a] | **city.h/sim.h** : Should the adjMatrix be shared (the same) among all the cities? Should the simulator update/maintain the matrix completely? I wrote down a method of updating the distance between two cities within **city.h**, but I think it would easiest if the simulator knows what the adjacent matrix and set the matrix upon the construction of the city instances. |
-| [b] | **city.h** : I dont know if we should worry about appending a new city to the adjMatrix. I was thinking it would involve going through each vector of vector and appending the new city from an array of calculated distances. But i think we shouldnt worry about increasing the cities/users during runtime. Maybe later?
-| [c] | **user.cpp/user.h** : lol forward declaration. Struggling how to return the ping for a user. The forward declarations with pointers is tripping me out and havent really gotten a change to really mess around with
-| [d] | **sim.h** I placed the main function in sim.cpp to have some output.
-| [e]| **user.h** I dont know how we're going to handle the user list that is within each user instance. How will we parse the "distanceTo" vector? What will happen as users are being removed from the list, people may be removed from the middle of the list. Would user class also have a sorting alroithm that makes sure that the first # people within the vector are the people with the least ping to? We would pop people off from the list? Dont really have anything in mind. 
+To read more about the project, please check out the pdf within the repo [here](https://github.com/AnthonyChen00/matchmaking_Sim/blob/master/Report.pdf)
